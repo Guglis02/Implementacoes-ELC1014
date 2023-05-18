@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="file://H:/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl"
+         xmlns="file://H:/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#">
+
+<owl:Ontology rdf:about="file://H:/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl"/>
+
+<owl:ObjectProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#BelongsToGenomeType">
+  <owl:inverseOf rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasGenomeType"/>
+  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#GenomeType"/>
+  <rdfs:range rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasGenomeType">
+  <owl:inverseOf rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasThisGenomeType"/>
+  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
+  <rdfs:range rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#GenomeType"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasThisGenomeType">
+  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#GenomeType"/>
+  <rdfs:range rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#BelongsToThisGroup">
+  <owl:inverseOf rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#FromBaltimoreGroup"/>
+  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#BaltimoreGroup"/>
+  <rdfs:range rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#FromBaltimoreGroup">
+  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
+  <rdfs:range rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#BaltimoreGroup"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#FromBaltimoreGroup">
+  <rdfs:domain rdf:resource="#Virus"/>
+  <rdfs:range rdf:resource="#BaltimoreGroup"/>
+  <owl:inverseOf rdf:resource="#BelongsToThisGroup"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#BelongsToThisGroup">
+  <rdfs:domain rdf:resource="#BaltimoreGroup"/>
+  <rdfs:range rdf:resource="#Virus"/>
+  <owl:inverseOf rdf:resource="#FromBaltimoreGroup"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#HasGenomeType">
+  <rdfs:domain rdf:resource="#Virus"/>
+  <rdfs:range rdf:resource="#GenomeType"/>
+  <owl:inverseOf rdf:resource="#HasThisGenomeType"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#HasThisGenomeType">
+  <rdfs:domain rdf:resource="#GenomeType"/>
+  <rdfs:range rdf:resource="#Virus"/>
+  <owl:inverseOf rdf:resource="#HasGenomeType"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#FromLineage">
+  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasForScientificName">
+  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasScientificName">
+  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#HasForScientificName">
+  <rdfs:domain rdf:resource="#Virus"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#FromLineage">
+  <rdfs:domain rdf:resource="#Virus"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#GenomeType">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Virus">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BaltimoreGroup">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#GenomeType">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Host">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Host">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<rdfs:Datatype rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#BaltimoreGroup">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</rdfs:Datatype>
+
+<Virus rdf:about="#Rhizoctonia_oryzae-sativae_mitovirus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rhizoctonia oryzae-sativae mitovirus 1</HasForScientificName>
+  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+</Virus>
+
+<BaltimoreGroup rdf:about="#ssRNA(+)">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BaltimoreGroup>
+
+<GenomeType rdf:about="#Non-segmented">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</GenomeType>
+
+<Virus rdf:about="#Microbacterium_phage_MementoMori">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Microbacterium phage MementoMori</HasForScientificName>
+  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+</Virus>
+
+<BaltimoreGroup rdf:about="#dsDNA">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BaltimoreGroup>
+
+<Virus rdf:about="#Pseudomonas_phage_Phabio">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pseudomonas phage Phabio</HasForScientificName>
+  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+</Virus>
+
+<Virus rdf:about="#Caucasus_prunus_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Caucasus prunus virus</HasForScientificName>
+  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+</Virus>
+
+<Virus rdf:about="#Klebsiella_phage_Marfa">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Klebsiella phage Marfa</HasForScientificName>
+  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+</Virus>
+
+<Virus rdf:about="#Porcine_astrovirus_2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Porcine astrovirus 2</HasForScientificName>
+  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+</Virus>
+
+<Virus rdf:about="#Human_papillomavirus_167">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Human papillomavirus 167</HasForScientificName>
+  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+</Virus>
+
+<Virus rdf:about="#Ruegeria_phage_vB_RpoP-V13">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ruegeria phage vB_RpoP-V13</HasForScientificName>
+  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+</Virus>
+
+<Virus rdf:about="#Singapore_grouper_iridovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Singapore grouper iridovirus</HasForScientificName>
+  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+</Virus>
+
+<Virus rdf:about="#Wenling_narna-like_virus_5">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromBaltimoreGroup rdf:resource="#RNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wenling narna-like virus 5</HasForScientificName>
+  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+</Virus>
+
+<BaltimoreGroup rdf:about="#RNA">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BaltimoreGroup>
+
+
+</rdf:RDF>
