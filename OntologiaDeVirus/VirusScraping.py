@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from owlready2 import *
 
 # Criação/Carregamento da ontologia
-onto = get_ontology("file://H:/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl").load()
+onto = get_ontology("file://virus_host_ontology.owl").load()
 
 # Url de onde foram extraidos os dados
 
@@ -14,12 +14,47 @@ def cleanScientificName(string):
     return string.split(" [TAX:")[0]
 
 def cleanBaltimoreGroup(string):
+    if string is None:
+        return "uknown"
+
     if ":" in string:
         cleaned_string = string.split(":")[1]
     else:
         cleaned_string = string
     
-    return cleaned_string.replace('\'', '').replace(' ', '')
+    return cleaned_string.strip()
+
+def GetLineage(entry):  
+    if "viria" in entry:
+        return (Realm(entry))
+    elif "vira" in entry:
+        return (Subrealm(entry))
+    elif "virae" in entry:
+        return (Kingdom(entry))
+    elif "virites" in entry:
+        return (Subkingdom(entry))
+    elif "viricota" in entry:
+        return (Phylum(entry))
+    elif "viricotina" in entry:
+        return (Subphylum(entry))
+    elif "viricetes" in entry:
+        return (Class(entry))
+    elif "viricetidae" in entry:
+        return (Subclass(entry))
+    elif "virales" in entry:
+        return (Order(entry))
+    elif "virineae" in entry:
+        return (Suborder(entry))
+    elif "viridae" in entry:
+        return (Family(entry))
+    elif "virinae" in entry:
+        return (Subfamily(entry))
+    elif "virus" in entry and " " not in entry:
+        return (Genus(entry))
+    elif "virus" in entry and " " in entry:
+        return (Subgenus(entry.replace(" ", "_")))
+    else:
+        return (Realm("Uknown"))
 
 # Função para obter os dados dos vírus
 def GetVirusData():
@@ -34,7 +69,7 @@ def GetVirusData():
     virus_table = soup.find("table", {"class": "view"})
     virus_rows = virus_table.find_all("tr")[2:]  # Ignorar o cabeçalho da tabela
 
-    viruses = random.sample(virus_rows, 5)
+    viruses = random.sample(virus_rows, 150)
 
     virus_data = []
     for virus_row in viruses:
@@ -49,17 +84,30 @@ def GetVirusData():
             value = row.find("td").text.strip()
             data[header] = value
 
+        hosts = []
+        for span in soup.find_all("span"):
+            if "Known hosts" in span.text:
+                n = int(span.text.split("(")[1].split(")")[0])
+                info_tables = span.find_all_next("table", class_="info")
+
+                for table in info_tables:
+                    row = table.find_next("tr")
+                    cell = row.find_next("td")
+                    info = cell.text.strip()
+                    hosts.append(cleanScientificName(info))
+
         scientific_name = cleanScientificName(data.get("Scientific Name"))
-        lineage = data.get("Lineage").split("; ")
+        print("Scientific Name:", scientific_name)
+        lineage = data.get("Lineage").split("; ")[1:]
         baltimore_group = cleanBaltimoreGroup(data.get("Baltimore Group"))
         genome_type = data.get("Genome Type")
 
-        virus_data.append((scientific_name, lineage, baltimore_group, genome_type))
+        virus_data.append((scientific_name, lineage, baltimore_group, genome_type, hosts))
 
-        #print("Scientific Name:", scientific_name)
-        #print("Lineage:", lineage)
-        #print("Baltimore Group:", baltimore_group)
-        #print("Genome Type:", genome_type)
+        # print("Lineage:", lineage)
+        # print("Baltimore Group:", baltimore_group)
+        # print("Genome Type:", genome_type)
+        # print("Hosts:", hosts)
 
     return virus_data
 
@@ -77,14 +125,56 @@ with onto:
     class Host(Thing):
         pass
 
+    class Realm(Thing):
+        pass
+
+    class Subrealm(Realm):
+        pass
+    
+    class Kingdom(Subrealm):
+        pass
+
+    class Subkingdom(Kingdom):
+        pass
+    
+    class Phylum(Subkingdom):
+        pass
+
+    class Subphylum(Phylum):
+        pass
+
+    class Class(Subphylum):
+        pass
+
+    class Subclass(Class):
+        pass
+
+    class Order(Subclass):
+        pass
+
+    class Suborder(Order):
+        pass
+
+    class Family(Suborder):
+        pass
+
+    class Subfamily(Family):
+        pass
+
+    class Genus(Subfamily):
+        pass
+
+    class Subgenus(Genus):
+        pass
+
     # Propriedades
     class HasForScientificName(DataProperty):
         domain = [Virus]
         range = [str]
 
-    class FromLineage(DataProperty):
+    class FromLineage(ObjectProperty):
         domain = [Virus]
-        range = [str]
+        range = [Realm]
 
     class FromBaltimoreGroup(ObjectProperty):
         domain = [Virus]
@@ -96,6 +186,11 @@ with onto:
         range = [GenomeType]
         inverse_property = onto.BelongsToGenomeType
 
+    class HasHost(ObjectProperty):
+        domain = [Virus]
+        range = [Host]
+        inverse_property = onto.HostThoseVirus
+
     # Propriedadas inversas  
     class BelongsToThisGroup(ObjectProperty):
         domain = [BaltimoreGroup]
@@ -106,38 +201,33 @@ with onto:
         domain = [GenomeType]
         range = [Virus]
         inverse_property = onto.HasGenomeType
-        
+
+    class HostThoseVirus(ObjectProperty):
+        domain = [Host]
+        range = [Virus]
+        inverse_property = onto.HasHost        
 
     # Dados dos vírus
     virus_data = GetVirusData()
-    for scientific_name, lineage, baltimore_group, genome_type in virus_data:
+    for scientific_name, lineage, baltimore_group, genome_type, hosts in virus_data:
         virus = Virus(scientific_name.replace(' ', '_'))
         virus.HasForScientificName.append(scientific_name)
-        virus.FromLineage.append(lineage[0])
+
+        for entry in lineage:
+            virus.FromLineage.append(GetLineage(entry))
+
         baltimoreGroup = BaltimoreGroup(baltimore_group)
         virus.FromBaltimoreGroup.append(baltimoreGroup)
         baltimoreGroup.BelongsToThisGroup.append(virus)
+
         genomeType = GenomeType(genome_type)
         virus.HasGenomeType.append(genomeType)
         genomeType.HasThisGenomeType.append(virus)
 
+        for entry in hosts:
+            host = Host(entry.replace(' ', '_'))
+            virus.HasHost.append(host)
+            host.HostThoseVirus.append(virus)
+
 # Salvando a ontologia em um arquivo .owl
 onto.save(file="virus_host_ontology.owl", format="rdfxml")
-
-
-# Classificação taxonomica
-# Realm (-viria)
-# Subrealm (-vira)
-# Kingdom (-virae)
-# Subkingdom (-virites)
-# Phylum (-viricota)
-# Subphylum (-viricotina)
-# Class (-viricetes)
-# Subclass (-viricetidae)
-# Order (-virales)
-# Suborder (-virineae)
-# Family (-viridae)
-# Subfamily (-virinae)
-# Genus (-virus)
-# Subgenus (-virus)
-# Species

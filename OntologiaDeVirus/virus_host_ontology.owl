@@ -3,41 +3,14 @@
          xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
-         xml:base="file://H:/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl"
-         xmlns="file://H:/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#">
+         xml:base="file://virus_host_ontology.owl"
+         xmlns="file://virus_host_ontology.owl#">
 
-<owl:Ontology rdf:about="file://H:/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl"/>
+<owl:Ontology rdf:about="file://virus_host_ontology.owl"/>
 
-<owl:ObjectProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#BelongsToGenomeType">
-  <owl:inverseOf rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasGenomeType"/>
-  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#GenomeType"/>
-  <rdfs:range rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasGenomeType">
-  <owl:inverseOf rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasThisGenomeType"/>
-  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
-  <rdfs:range rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#GenomeType"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasThisGenomeType">
-  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#GenomeType"/>
-  <rdfs:range rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#BelongsToThisGroup">
-  <owl:inverseOf rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#FromBaltimoreGroup"/>
-  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#BaltimoreGroup"/>
-  <rdfs:range rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#FromBaltimoreGroup">
-  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
-  <rdfs:range rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#BaltimoreGroup"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<owl:ObjectProperty rdf:about="#FromLineage">
+  <rdfs:domain rdf:resource="#Virus"/>
+  <rdfs:range rdf:resource="#Realm"/>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#FromBaltimoreGroup">
@@ -46,16 +19,22 @@
   <owl:inverseOf rdf:resource="#BelongsToThisGroup"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#BelongsToThisGroup">
-  <rdfs:domain rdf:resource="#BaltimoreGroup"/>
-  <rdfs:range rdf:resource="#Virus"/>
-  <owl:inverseOf rdf:resource="#FromBaltimoreGroup"/>
-</owl:ObjectProperty>
-
 <owl:ObjectProperty rdf:about="#HasGenomeType">
   <rdfs:domain rdf:resource="#Virus"/>
   <rdfs:range rdf:resource="#GenomeType"/>
   <owl:inverseOf rdf:resource="#HasThisGenomeType"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#HasHost">
+  <rdfs:domain rdf:resource="#Virus"/>
+  <rdfs:range rdf:resource="#Host"/>
+  <owl:inverseOf rdf:resource="#HostThoseVirus"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#BelongsToThisGroup">
+  <rdfs:domain rdf:resource="#BaltimoreGroup"/>
+  <rdfs:range rdf:resource="#Virus"/>
+  <owl:inverseOf rdf:resource="#FromBaltimoreGroup"/>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#HasThisGenomeType">
@@ -64,38 +43,16 @@
   <owl:inverseOf rdf:resource="#HasGenomeType"/>
 </owl:ObjectProperty>
 
-<owl:DatatypeProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#FromLineage">
-  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasForScientificName">
-  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#HasScientificName">
-  <rdfs:domain rdf:resource="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-</owl:DatatypeProperty>
+<owl:ObjectProperty rdf:about="#HostThoseVirus">
+  <rdfs:domain rdf:resource="#Host"/>
+  <rdfs:range rdf:resource="#Virus"/>
+  <owl:inverseOf rdf:resource="#HasHost"/>
+</owl:ObjectProperty>
 
 <owl:DatatypeProperty rdf:about="#HasForScientificName">
   <rdfs:domain rdf:resource="#Virus"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#FromLineage">
-  <rdfs:domain rdf:resource="#Virus"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-</owl:DatatypeProperty>
-
-<owl:Class rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#GenomeType">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-</owl:Class>
-
-<owl:Class rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Virus">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-</owl:Class>
 
 <owl:Class rdf:about="#Virus">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
@@ -109,26 +66,133 @@
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
 </owl:Class>
 
-<owl:Class rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#Host">
-  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-</owl:Class>
-
 <owl:Class rdf:about="#Host">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
 </owl:Class>
 
-<rdfs:Datatype rdf:about="file://H/My%20Drive/UFSM/7%20semestre/IA/Trabalho%20Ontologias/virus_host_ontology.owl#BaltimoreGroup">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+<owl:Class rdf:about="#Realm">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-</rdfs:Datatype>
+</owl:Class>
 
-<Virus rdf:about="#Rhizoctonia_oryzae-sativae_mitovirus_1">
+<owl:Class rdf:about="#Subrealm">
+  <rdfs:subClassOf rdf:resource="#Realm"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Kingdom">
+  <rdfs:subClassOf rdf:resource="#Subrealm"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Subkingdom">
+  <rdfs:subClassOf rdf:resource="#Kingdom"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Phylum">
+  <rdfs:subClassOf rdf:resource="#Subkingdom"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Subphylum">
+  <rdfs:subClassOf rdf:resource="#Phylum"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Class">
+  <rdfs:subClassOf rdf:resource="#Subphylum"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Subclass">
+  <rdfs:subClassOf rdf:resource="#Class"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Order">
+  <rdfs:subClassOf rdf:resource="#Subclass"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Suborder">
+  <rdfs:subClassOf rdf:resource="#Order"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Family">
+  <rdfs:subClassOf rdf:resource="#Suborder"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Subfamily">
+  <rdfs:subClassOf rdf:resource="#Family"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Genus">
+  <rdfs:subClassOf rdf:resource="#Subfamily"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Subgenus">
+  <rdfs:subClassOf rdf:resource="#Genus"/>
+</owl:Class>
+
+<Virus rdf:about="#Porcine_deltacoronavirus">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Nidovirales"/>
+  <FromLineage rdf:resource="#Cornidovirineae"/>
+  <FromLineage rdf:resource="#Coronaviridae"/>
+  <FromLineage rdf:resource="#Orthocoronavirinae"/>
+  <FromLineage rdf:resource="#Deltacoronavirus"/>
+  <FromLineage rdf:resource="#Buldecovirus"/>
+  <FromLineage rdf:resource="#Coronavirus_HKU15"/>
+  <FromLineage rdf:resource="#Porcine_coronavirus_HKU15"/>
   <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
   <HasGenomeType rdf:resource="#Non-segmented"/>
-  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rhizoctonia oryzae-sativae mitovirus 1</HasForScientificName>
-  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+  <HasHost rdf:resource="#Sus_scrofa"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Porcine deltacoronavirus</HasForScientificName>
 </Virus>
+
+<Realm rdf:about="#Riboviria">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Realm>
+
+<Subrealm rdf:about="#Orthornavirae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Phylum rdf:about="#Pisuviricota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Phylum>
+
+<Class rdf:about="#Pisoniviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Nidovirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Suborder rdf:about="#Cornidovirineae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Suborder>
+
+<Family rdf:about="#Coronaviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Orthocoronavirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Deltacoronavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Genus rdf:about="#Buldecovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Coronavirus_HKU15">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Subgenus rdf:about="#Porcine_coronavirus_HKU15">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
 
 <BaltimoreGroup rdf:about="#ssRNA(+)">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -138,85 +202,4162 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </GenomeType>
 
-<Virus rdf:about="#Microbacterium_phage_MementoMori">
+<Host rdf:about="#Sus_scrofa">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Yam_virus_X">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Kitrinoviricota"/>
+  <FromLineage rdf:resource="#Alsuviricetes"/>
+  <FromLineage rdf:resource="#Tymovirales"/>
+  <FromLineage rdf:resource="#Alphaflexiviridae"/>
+  <FromLineage rdf:resource="#Potexvirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Dioscorea_trifida"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Yam virus X</HasForScientificName>
+</Virus>
+
+<Phylum rdf:about="#Kitrinoviricota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Phylum>
+
+<Class rdf:about="#Alsuviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Tymovirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Alphaflexiviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Potexvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Dioscorea_trifida">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Banana_bunchy_top_alphasatellite_2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Uknown"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Musa_acuminata"/>
+  <HasHost rdf:resource="#Banana_bunchy_top_virus"/>
+  <HasHost rdf:resource="#Musa_x_paradisiaca"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Banana bunchy top alphasatellite 2</HasForScientificName>
+</Virus>
+
+<Realm rdf:about="#Uknown">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Realm>
+
+<BaltimoreGroup rdf:about="#ssDNA(+)">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BaltimoreGroup>
+
+<Host rdf:about="#Musa_acuminata">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Banana_bunchy_top_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Musa_x_paradisiaca">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Nephila_clavipes_virus_3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Kitrinoviricota"/>
+  <FromLineage rdf:resource="#Alsuviricetes"/>
+  <FromLineage rdf:resource="#Martellivirales"/>
+  <FromLineage rdf:resource="#Virgaviridae"/>
+  <FromLineage rdf:resource="#unclassified Virgaviridae"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Trichonephila_clavipes"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nephila clavipes virus 3</HasForScientificName>
+</Virus>
+
+<Subrealm rdf:about="#Martellivirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Virgaviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Family rdf:about="#unclassified Virgaviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Host rdf:about="#Trichonephila_clavipes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Norovirus_Hu/GII-4/CGMH15/2007/TW">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Picornavirales"/>
+  <FromLineage rdf:resource="#Caliciviridae"/>
+  <FromLineage rdf:resource="#Norovirus"/>
+  <FromLineage rdf:resource="#Norwalk_virus"/>
+  <FromLineage rdf:resource="#Norovirus_GII"/>
+  <FromLineage rdf:resource="#Norovirus_GII.4"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Homo_sapiens"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Norovirus Hu/GII-4/CGMH15/2007/TW</HasForScientificName>
+</Virus>
+
+<Subrealm rdf:about="#Picornavirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Caliciviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Norovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Norwalk_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Subgenus rdf:about="#Norovirus_GII">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Subgenus rdf:about="#Norovirus_GII.4">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Homo_sapiens">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Klebsiella_phage_vB_KpnS_Alina">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Drexlerviridae"/>
+  <FromLineage rdf:resource="#Webervirus"/>
+  <FromLineage rdf:resource="#Webervirus_alina"/>
   <FromBaltimoreGroup rdf:resource="#dsDNA"/>
   <HasGenomeType rdf:resource="#Non-segmented"/>
-  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Microbacterium phage MementoMori</HasForScientificName>
-  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+  <HasHost rdf:resource="#Klebsiella_pneumoniae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Klebsiella phage vB_KpnS_Alina</HasForScientificName>
 </Virus>
+
+<Realm rdf:about="#Duplodnaviria">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Realm>
+
+<Subrealm rdf:about="#Heunggongvirae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Phylum rdf:about="#Uroviricota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Phylum>
+
+<Class rdf:about="#Caudoviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Family rdf:about="#Drexlerviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Webervirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Webervirus_alina">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
 
 <BaltimoreGroup rdf:about="#dsDNA">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </BaltimoreGroup>
 
-<Virus rdf:about="#Pseudomonas_phage_Phabio">
+<Host rdf:about="#Klebsiella_pneumoniae">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
-  <HasGenomeType rdf:resource="#Non-segmented"/>
-  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pseudomonas phage Phabio</HasForScientificName>
-  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
-</Virus>
+</Host>
 
-<Virus rdf:about="#Caucasus_prunus_virus">
+<Virus rdf:about="#Hubei_picorna-like_virus_30">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
-  <HasGenomeType rdf:resource="#Non-segmented"/>
-  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Caucasus prunus virus</HasForScientificName>
-  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
-</Virus>
-
-<Virus rdf:about="#Klebsiella_phage_Marfa">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
-  <HasGenomeType rdf:resource="#Non-segmented"/>
-  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Klebsiella phage Marfa</HasForScientificName>
-  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
-</Virus>
-
-<Virus rdf:about="#Porcine_astrovirus_2">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
-  <HasGenomeType rdf:resource="#Non-segmented"/>
-  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Porcine astrovirus 2</HasForScientificName>
-  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
-</Virus>
-
-<Virus rdf:about="#Human_papillomavirus_167">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
-  <HasGenomeType rdf:resource="#Non-segmented"/>
-  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Human papillomavirus 167</HasForScientificName>
-  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
-</Virus>
-
-<Virus rdf:about="#Ruegeria_phage_vB_RpoP-V13">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
-  <HasGenomeType rdf:resource="#Non-segmented"/>
-  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ruegeria phage vB_RpoP-V13</HasForScientificName>
-  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
-</Virus>
-
-<Virus rdf:about="#Singapore_grouper_iridovirus">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
-  <HasGenomeType rdf:resource="#Non-segmented"/>
-  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Singapore grouper iridovirus</HasForScientificName>
-  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
-</Virus>
-
-<Virus rdf:about="#Wenling_narna-like_virus_5">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#unclassified Riboviria"/>
+  <FromLineage rdf:resource="#unclassified_RNA_viruses_ShiM-2016"/>
   <FromBaltimoreGroup rdf:resource="#RNA"/>
   <HasGenomeType rdf:resource="#Non-segmented"/>
-  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wenling narna-like virus 5</HasForScientificName>
-  <FromLineage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Viruses</FromLineage>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hubei picorna-like virus 30</HasForScientificName>
 </Virus>
+
+<Realm rdf:about="#unclassified Riboviria">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Realm>
+
+<Subgenus rdf:about="#unclassified_RNA_viruses_ShiM-2016">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
 
 <BaltimoreGroup rdf:about="#RNA">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </BaltimoreGroup>
+
+<Host rdf:about="#root">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Vibrio_phage_JSF7">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Autographiviridae"/>
+  <FromLineage rdf:resource="#Tawavirus"/>
+  <FromLineage rdf:resource="#Tawavirus_JSF7"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Vibrio_cholerae_O1_biovar_El_Tor"/>
+  <HasHost rdf:resource="#Vibrio_cholerae_O139"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vibrio phage JSF7</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Autographiviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Tawavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Tawavirus_JSF7">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Vibrio_cholerae_O1_biovar_El_Tor">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Vibrio_cholerae_O139">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Microbacterium_phage_Neferthena">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Neferthenavirus"/>
+  <FromLineage rdf:resource="#Neferthenavirus_neferthena"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Microbacterium_foliorum"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Microbacterium phage Neferthena</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Neferthenavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Neferthenavirus_neferthena">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Microbacterium_foliorum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Vernonia_yellow_vein_Fujian_alphasatellite">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Uknown"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Vigna_mungo"/>
+  <HasHost rdf:resource="#Vernonia"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vernonia yellow vein Fujian alphasatellite</HasForScientificName>
+</Virus>
+
+<BaltimoreGroup rdf:about="#ssDNA">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BaltimoreGroup>
+
+<Host rdf:about="#Vigna_mungo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Vernonia">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Faeces_associated_gemycircularvirus_16">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Repensiviricetes"/>
+  <FromLineage rdf:resource="#Geplafuvirales"/>
+  <FromLineage rdf:resource="#Genomoviridae"/>
+  <FromLineage rdf:resource="#Gemycircularvirus"/>
+  <FromLineage rdf:resource="#Gemycircularvirus_sheas1"/>
+  <FromLineage rdf:resource="#Sheep_associated_gemycircularvirus_1"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Ovis_aries"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Faeces associated gemycircularvirus 16</HasForScientificName>
+</Virus>
+
+<Realm rdf:about="#Monodnaviria">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Realm>
+
+<Subrealm rdf:about="#Shotokuvirae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Phylum rdf:about="#Cressdnaviricota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Phylum>
+
+<Class rdf:about="#Repensiviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Geplafuvirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Genomoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Gemycircularvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Gemycircularvirus_sheas1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Subgenus rdf:about="#Sheep_associated_gemycircularvirus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Ovis_aries">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Feline_sakobuvirus_A">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Picornavirales"/>
+  <FromLineage rdf:resource="#Picornaviridae"/>
+  <FromLineage rdf:resource="#Kodimesavirinae"/>
+  <FromLineage rdf:resource="#Sakobuvirus"/>
+  <FromLineage rdf:resource="#Sakobuvirus_A"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Felis_catus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Feline sakobuvirus A</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Picornaviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Kodimesavirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Sakobuvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Sakobuvirus_A">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Felis_catus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Phormidium_phage_Pf-WMP4">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Wumpquatrovirus"/>
+  <FromLineage rdf:resource="#Wumpquatrovirus_WMP4"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Phormidium"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phormidium phage Pf-WMP4</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Wumpquatrovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Wumpquatrovirus_WMP4">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Phormidium">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Trichoderma_asperellum_dsRNA_virus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#dsRNA_viruses"/>
+  <FromLineage rdf:resource="#unclassified_dsRNA_viruses"/>
+  <FromBaltimoreGroup rdf:resource="#dsRNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Trichoderma_asperellum"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Trichoderma asperellum dsRNA virus 1</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#dsRNA_viruses">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Subgenus rdf:about="#unclassified_dsRNA_viruses">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<BaltimoreGroup rdf:about="#dsRNA">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BaltimoreGroup>
+
+<Host rdf:about="#Trichoderma_asperellum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Lactococcus_phage_936_group_phage_Phi155">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Skunavirus"/>
+  <FromLineage rdf:resource="#Skunavirus_sv155"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Lactococcus_lactis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lactococcus phage 936 group phage Phi155</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Skunavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Skunavirus_sv155">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Lactococcus_lactis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Rio_Grande_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Negarnaviricota"/>
+  <FromLineage rdf:resource="#Polyploviricotina"/>
+  <FromLineage rdf:resource="#Ellioviricetes"/>
+  <FromLineage rdf:resource="#Bunyavirales"/>
+  <FromLineage rdf:resource="#Phenuiviridae"/>
+  <FromLineage rdf:resource="#Phlebovirus"/>
+  <FromLineage rdf:resource="#Rio_Grande_phlebovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(-)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Chlorocebus_aethiops"/>
+  <HasHost rdf:resource="#Equus_caballus"/>
+  <HasHost rdf:resource="#Ovis_aries"/>
+  <HasHost rdf:resource="#Neotoma_micropus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rio Grande virus</HasForScientificName>
+</Virus>
+
+<Phylum rdf:about="#Negarnaviricota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Phylum>
+
+<Subphylum rdf:about="#Polyploviricotina">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subphylum>
+
+<Class rdf:about="#Ellioviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Bunyavirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Phenuiviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Phlebovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Rio_Grande_phlebovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<BaltimoreGroup rdf:about="#ssRNA(-)">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BaltimoreGroup>
+
+<GenomeType rdf:about="#Segmented">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</GenomeType>
+
+<Host rdf:about="#Chlorocebus_aethiops">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Equus_caballus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Neotoma_micropus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Alajuela_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Negarnaviricota"/>
+  <FromLineage rdf:resource="#Polyploviricotina"/>
+  <FromLineage rdf:resource="#Ellioviricetes"/>
+  <FromLineage rdf:resource="#Bunyavirales"/>
+  <FromLineage rdf:resource="#Peribunyaviridae"/>
+  <FromLineage rdf:resource="#Orthobunyavirus"/>
+  <FromLineage rdf:resource="#Alajuela_orthobunyavirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(-)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Aedeomyia_squamipennis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alajuela virus</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Peribunyaviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Orthobunyavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Alajuela_orthobunyavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Aedeomyia_squamipennis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Mycobacterium_phage_Phrappuccino">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Phrappuccinovirus"/>
+  <FromLineage rdf:resource="#Phreappuccinovirus_Phrappuccino"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Mycolicibacterium_smegmatis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mycobacterium phage Phrappuccino</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Phrappuccinovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Phreappuccinovirus_Phrappuccino">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Mycolicibacterium_smegmatis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Ranid_herpesvirus_2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Peploviricota"/>
+  <FromLineage rdf:resource="#Herviviricetes"/>
+  <FromLineage rdf:resource="#Herpesvirales"/>
+  <FromLineage rdf:resource="#Alloherpesviridae"/>
+  <FromLineage rdf:resource="#Batrachovirus"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Lithobates_pipiens"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ranid herpesvirus 2</HasForScientificName>
+</Virus>
+
+<Phylum rdf:about="#Peploviricota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Phylum>
+
+<Class rdf:about="#Herviviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Herpesvirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Alloherpesviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Batrachovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Lithobates_pipiens">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Streptococcus_phage_CHPC1033">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Moineauvirus"/>
+  <FromLineage rdf:resource="#unclassified_Moineauvirus"/>
+  <FromBaltimoreGroup rdf:resource="#uknown"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Streptococcus_thermophilus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Streptococcus phage CHPC1033</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Moineauvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#unclassified_Moineauvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<BaltimoreGroup rdf:about="#uknown">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BaltimoreGroup>
+
+<Host rdf:about="#Streptococcus_thermophilus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Lake_Sarah-associated_circular_virus-28">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#unclassified_viruses"/>
+  <FromBaltimoreGroup rdf:resource="#unknown"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasHost rdf:resource="#Potamopyrgus_antipodarum"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lake Sarah-associated circular virus-28</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#unclassified_viruses">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<BaltimoreGroup rdf:about="#unknown">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BaltimoreGroup>
+
+<Host rdf:about="#Potamopyrgus_antipodarum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Didemnum_sp._Sea_Squirt_associated_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Arfiviricetes"/>
+  <FromLineage rdf:resource="#Cirlivirales"/>
+  <FromLineage rdf:resource="#Circoviridae"/>
+  <FromLineage rdf:resource="#unclassified Circoviridae"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Didemnum_sp."/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Didemnum sp. Sea Squirt associated virus</HasForScientificName>
+</Virus>
+
+<Class rdf:about="#Arfiviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Cirlivirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Circoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Family rdf:about="#unclassified Circoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Host rdf:about="#Didemnum_sp.">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Bromus-associated_circular_DNA_virus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#unclassified_viruses"/>
+  <FromLineage rdf:resource="#unclassified_DNA_viruses"/>
+  <FromLineage rdf:resource="#unclassified_ssDNA_viruses"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Bromus_hordeaceus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bromus-associated circular DNA virus 1</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#unclassified_DNA_viruses">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Subgenus rdf:about="#unclassified_ssDNA_viruses">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Bromus_hordeaceus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Batai_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Negarnaviricota"/>
+  <FromLineage rdf:resource="#Polyploviricotina"/>
+  <FromLineage rdf:resource="#Ellioviricetes"/>
+  <FromLineage rdf:resource="#Bunyavirales"/>
+  <FromLineage rdf:resource="#Peribunyaviridae"/>
+  <FromLineage rdf:resource="#Orthobunyavirus"/>
+  <FromLineage rdf:resource="#Batai_orthobunyavirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(-)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Aedes_curtipes"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Batai virus</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#Batai_orthobunyavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Aedes_curtipes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Beihai_picorna-like_virus_122">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#unclassified Riboviria"/>
+  <FromLineage rdf:resource="#unclassified_RNA_viruses_ShiM-2016"/>
+  <FromBaltimoreGroup rdf:resource="#RNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Beihai picorna-like virus 122</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Trichomonas_vaginalis_virus_dsRNA_satellite_S1prime">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Uknown"/>
+  <FromBaltimoreGroup rdf:resource="#dsRNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Trichomonas_vaginalis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Trichomonas vaginalis virus dsRNA satellite S1prime</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Trichomonas_vaginalis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Ecklonia_radiata-associated_virus_7">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Arfiviricetes"/>
+  <FromLineage rdf:resource="#Cirlivirales"/>
+  <FromLineage rdf:resource="#Circoviridae"/>
+  <FromLineage rdf:resource="#unclassified Circoviridae"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Ecklonia_radiata"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ecklonia radiata-associated virus 7</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Ecklonia_radiata">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Porcine_stool-associated_circular_virus_2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Arfiviricetes"/>
+  <FromLineage rdf:resource="#Cremevirales"/>
+  <FromLineage rdf:resource="#Smacoviridae"/>
+  <FromLineage rdf:resource="#Porprismacovirus"/>
+  <FromLineage rdf:resource="#Porprismacovirus_porci2"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA(+/-)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Sus_scrofa"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Porcine stool-associated circular virus 2</HasForScientificName>
+</Virus>
+
+<Subrealm rdf:about="#Cremevirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Smacoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Porprismacovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Porprismacovirus_porci2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<BaltimoreGroup rdf:about="#ssDNA(+/-)">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BaltimoreGroup>
+
+<Virus rdf:about="#uncultured_phage_cr36_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Crassvirales"/>
+  <FromLineage rdf:resource="#Intestiviridae"/>
+  <FromLineage rdf:resource="#Churivirinae"/>
+  <FromLineage rdf:resource="#Jahgtovirus"/>
+  <FromLineage rdf:resource="#Jahgtovirus_gastrointestinalis"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Bacteroides_thetaiotaomicron"/>
+  <HasHost rdf:resource="#Bacteroidota"/>
+  <HasHost rdf:resource="#Cellulophaga_baltica"/>
+  <HasHost rdf:resource="#Bacteroides_intestinalis"/>
+  <HasHost rdf:resource="#Bacteroides_xylanisolvens"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">uncultured phage cr36_1</HasForScientificName>
+</Virus>
+
+<Subrealm rdf:about="#Crassvirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Intestiviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Churivirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Jahgtovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Jahgtovirus_gastrointestinalis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Bacteroides_thetaiotaomicron">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Bacteroidota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Cellulophaga_baltica">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Bacteroides_intestinalis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Bacteroides_xylanisolvens">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Streptococcus_phage_P9851">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Moineauvirus"/>
+  <FromLineage rdf:resource="#unclassified_Moineauvirus"/>
+  <FromBaltimoreGroup rdf:resource="#uknown"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Streptococcus_thermophilus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Streptococcus phage P9851</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Escherichia_phage_T1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Drexlerviridae"/>
+  <FromLineage rdf:resource="#Tunavirinae"/>
+  <FromLineage rdf:resource="#Tunavirus"/>
+  <FromLineage rdf:resource="#Tunavirus_T1"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Escherichia_coli"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Escherichia phage T1</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Tunavirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Tunavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Tunavirus_T1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Escherichia_coli">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Lactobacillus_phage_Ld17">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Cequinquevirus"/>
+  <FromLineage rdf:resource="#Cequinquevirus_Ld17"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Lactobacillus_delbrueckii"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lactobacillus phage Ld17</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Cequinquevirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Cequinquevirus_Ld17">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Lactobacillus_delbrueckii">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Escherichia_phage_flopper">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Chaseviridae"/>
+  <FromLineage rdf:resource="#Cleopatravirinae"/>
+  <FromLineage rdf:resource="#Carltongylesvirus"/>
+  <FromLineage rdf:resource="#Carltongylesvirus_flopper"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Escherichia_coli_K-12"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Escherichia phage flopper</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Chaseviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Cleopatravirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Carltongylesvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Carltongylesvirus_flopper">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Escherichia_coli_K-12">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Salmonella_phage_Spc35">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Demerecviridae"/>
+  <FromLineage rdf:resource="#Markadamsvirinae"/>
+  <FromLineage rdf:resource="#Tequintavirus"/>
+  <FromLineage rdf:resource="#Tequintavirus_SPC35"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Escherichia_coli"/>
+  <HasHost rdf:resource="#Salmonella_enterica_subsp._enterica_serovar_Typhimurium"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Salmonella phage Spc35</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Demerecviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Markadamsvirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Tequintavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Tequintavirus_SPC35">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Salmonella_enterica_subsp._enterica_serovar_Typhimurium">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Slow_loris_parvovirus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cossaviricota"/>
+  <FromLineage rdf:resource="#Quintoviricetes"/>
+  <FromLineage rdf:resource="#Piccovirales"/>
+  <FromLineage rdf:resource="#Parvoviridae"/>
+  <FromLineage rdf:resource="#unclassified Parvoviridae"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Nycticebus_coucang"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Slow loris parvovirus 1</HasForScientificName>
+</Virus>
+
+<Phylum rdf:about="#Cossaviricota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Phylum>
+
+<Class rdf:about="#Quintoviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Piccovirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Parvoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Family rdf:about="#unclassified Parvoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Host rdf:about="#Nycticebus_coucang">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Enterobacteria_phage_T6">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Straboviridae"/>
+  <FromLineage rdf:resource="#Tevenvirinae"/>
+  <FromLineage rdf:resource="#Tequatrovirus"/>
+  <FromLineage rdf:resource="#Tequatrovirus_T6"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Escherichia_coli"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Enterobacteria phage T6</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Straboviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Tevenvirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Tequatrovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Tequatrovirus_T6">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Gordonia_phage_Lennon">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Vividuovirus"/>
+  <FromLineage rdf:resource="#Gordonia_virus_Lennon"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Gordonia_terrae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gordonia phage Lennon</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Vividuovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Gordonia_virus_Lennon">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Gordonia_terrae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Circovirus-like_genome_DCCV-2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Arfiviricetes"/>
+  <FromLineage rdf:resource="#Cirlivirales"/>
+  <FromLineage rdf:resource="#Circoviridae"/>
+  <FromLineage rdf:resource="#unclassified Circoviridae"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Circovirus-like genome DCCV-2</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Sewage-associated_circular_DNA_virus-12">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#unclassified_viruses"/>
+  <FromBaltimoreGroup rdf:resource="#unknown"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sewage-associated circular DNA virus-12</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Vibrio_phage_VpKK5">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Queuovirinae"/>
+  <FromLineage rdf:resource="#unclassified Queuovirinae"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Vibrio_parahaemolyticus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vibrio phage VpKK5</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Queuovirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Subfamily rdf:about="#unclassified Queuovirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Host rdf:about="#Vibrio_parahaemolyticus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Prochlorococcus_phage_MED4-184">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#unclassified Caudoviricetes"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Prochlorococcus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prochlorococcus phage MED4-184</HasForScientificName>
+</Virus>
+
+<Class rdf:about="#unclassified Caudoviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Host rdf:about="#Prochlorococcus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Streptomyces_phage_Karimac">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Boydwoodruffvirinae"/>
+  <FromLineage rdf:resource="#Karimacvirus"/>
+  <FromLineage rdf:resource="#Streptomyces_virus_Karimac"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Streptomyces_griseus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Streptomyces phage Karimac</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Boydwoodruffvirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Karimacvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Streptomyces_virus_Karimac">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Streptomyces_griseus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Ovis_aries_papillomavirus_3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cossaviricota"/>
+  <FromLineage rdf:resource="#Papovaviricetes"/>
+  <FromLineage rdf:resource="#Zurhausenvirales"/>
+  <FromLineage rdf:resource="#Papillomaviridae"/>
+  <FromLineage rdf:resource="#Firstpapillomavirinae"/>
+  <FromLineage rdf:resource="#Dyokappapapillomavirus"/>
+  <FromLineage rdf:resource="#Dyokappapapillomavirus_1"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Ovis_aries"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ovis aries papillomavirus 3</HasForScientificName>
+</Virus>
+
+<Class rdf:about="#Papovaviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Zurhausenvirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Papillomaviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Firstpapillomavirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Dyokappapapillomavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Dyokappapapillomavirus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Apple_luteovirus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Kitrinoviricota"/>
+  <FromLineage rdf:resource="#Tolucaviricetes"/>
+  <FromLineage rdf:resource="#Tolivirales"/>
+  <FromLineage rdf:resource="#Tombusviridae"/>
+  <FromLineage rdf:resource="#Luteovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Malus_domestica"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Apple luteovirus 1</HasForScientificName>
+</Virus>
+
+<Class rdf:about="#Tolucaviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Tolivirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Tombusviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Luteovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Malus_domestica">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Bacillus_phage_vB_BanS-Tsamsa">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#unclassified Caudoviricetes"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Bacillus_anthracis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bacillus phage vB_BanS-Tsamsa</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Bacillus_anthracis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Harrison_Dam_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Negarnaviricota"/>
+  <FromLineage rdf:resource="#Haploviricotina"/>
+  <FromLineage rdf:resource="#Monjiviricetes"/>
+  <FromLineage rdf:resource="#Mononegavirales"/>
+  <FromLineage rdf:resource="#Rhabdoviridae"/>
+  <FromLineage rdf:resource="#Alpharhabdovirinae"/>
+  <FromLineage rdf:resource="#Sunrhavirus"/>
+  <FromLineage rdf:resource="#Sunrhavirus_harrison"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(-)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Culex_annulirostris"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Harrison Dam virus</HasForScientificName>
+</Virus>
+
+<Subphylum rdf:about="#Haploviricotina">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subphylum>
+
+<Class rdf:about="#Monjiviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Mononegavirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Rhabdoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Alpharhabdovirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Sunrhavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Sunrhavirus_harrison">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Culex_annulirostris">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Sclerotinia_sclerotiorum_mitovirus_2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Lenarviricota"/>
+  <FromLineage rdf:resource="#Howeltoviricetes"/>
+  <FromLineage rdf:resource="#Cryppavirales"/>
+  <FromLineage rdf:resource="#Mitoviridae"/>
+  <FromLineage rdf:resource="#Unuamitovirus"/>
+  <FromLineage rdf:resource="#Unuamitovirus_scsc2"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Sclerotinia_sclerotiorum"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sclerotinia sclerotiorum mitovirus 2</HasForScientificName>
+</Virus>
+
+<Phylum rdf:about="#Lenarviricota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Phylum>
+
+<Class rdf:about="#Howeltoviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Cryppavirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Mitoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Unuamitovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Unuamitovirus_scsc2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Sclerotinia_sclerotiorum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Vibrio_phage_JA-1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Schitoviridae"/>
+  <FromLineage rdf:resource="#Pacinivirus"/>
+  <FromLineage rdf:resource="#Pacinivirus_VCO139"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Vibrio_cholerae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vibrio phage JA-1</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Schitoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Pacinivirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Pacinivirus_VCO139">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Vibrio_cholerae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Pseudomonas_phage_PP7">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Lenarviricota"/>
+  <FromLineage rdf:resource="#Leviviricetes"/>
+  <FromLineage rdf:resource="#Norzivirales"/>
+  <FromLineage rdf:resource="#Fiersviridae"/>
+  <FromLineage rdf:resource="#Pepevirus"/>
+  <FromLineage rdf:resource="#Pepevirus_rubrum"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Pseudomonas_aeruginosa"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pseudomonas phage PP7</HasForScientificName>
+</Virus>
+
+<Class rdf:about="#Leviviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Norzivirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Fiersviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Pepevirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Pepevirus_rubrum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Pseudomonas_aeruginosa">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Hubei_tombus-like_virus_43">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#unclassified Riboviria"/>
+  <FromLineage rdf:resource="#unclassified_RNA_viruses_ShiM-2016"/>
+  <FromBaltimoreGroup rdf:resource="#RNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hubei tombus-like virus 43</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Nome_phantom_orthophasmavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Negarnaviricota"/>
+  <FromLineage rdf:resource="#Polyploviricotina"/>
+  <FromLineage rdf:resource="#Ellioviricetes"/>
+  <FromLineage rdf:resource="#Bunyavirales"/>
+  <FromLineage rdf:resource="#Phasmaviridae"/>
+  <FromLineage rdf:resource="#Orthophasmavirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(-)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Chaoborus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nome phantom orthophasmavirus</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Phasmaviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Orthophasmavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Chaoborus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Gossypium_davidsonii_symptomless_alphasatellite">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Uknown"/>
+  <FromLineage rdf:resource="#unclassified_Begomovirus-associated_alphasatellites"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Gossypium_mustelinum"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gossypium davidsonii symptomless alphasatellite</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#unclassified_Begomovirus-associated_alphasatellites">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Gossypium_mustelinum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Chimpanzee_stool_associated_circular_ssDNA_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Arfiviricetes"/>
+  <FromLineage rdf:resource="#Cremevirales"/>
+  <FromLineage rdf:resource="#Smacoviridae"/>
+  <FromLineage rdf:resource="#Porprismacovirus"/>
+  <FromLineage rdf:resource="#unclassified_Porprismacovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chimpanzee stool associated circular ssDNA virus</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#unclassified_Porprismacovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Tobacco_curly_shoot_virus_-_[SC118]">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Repensiviricetes"/>
+  <FromLineage rdf:resource="#Geplafuvirales"/>
+  <FromLineage rdf:resource="#Geminiviridae"/>
+  <FromLineage rdf:resource="#Begomovirus"/>
+  <FromLineage rdf:resource="#Tobacco_curly_shoot_virus"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Capsicum"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tobacco curly shoot virus - [SC118]</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Geminiviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Begomovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Host"/>
+</Genus>
+
+<Subgenus rdf:about="#Tobacco_curly_shoot_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Capsicum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Equine_rhinitis_A_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Picornavirales"/>
+  <FromLineage rdf:resource="#Picornaviridae"/>
+  <FromLineage rdf:resource="#Caphthovirinae"/>
+  <FromLineage rdf:resource="#Aphthovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Equus_caballus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Equine rhinitis A virus</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Caphthovirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Aphthovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Virus rdf:about="#Red_clover_nepovirus_A">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Picornavirales"/>
+  <FromLineage rdf:resource="#Secoviridae"/>
+  <FromLineage rdf:resource="#Comovirinae"/>
+  <FromLineage rdf:resource="#Nepovirus"/>
+  <FromLineage rdf:resource="#Nepovirus_RCNA"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Trifolium_pratense"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Red clover nepovirus A</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Secoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Comovirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Nepovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Nepovirus_RCNA">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Trifolium_pratense">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Wilkie_narna-like_virus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#unclassified_viruses"/>
+  <FromBaltimoreGroup rdf:resource="#unknown"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Ochlerotatus_camptorhynchus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wilkie narna-like virus 1</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Ochlerotatus_camptorhynchus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Hubei_earwig_virus_3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#unclassified Riboviria"/>
+  <FromLineage rdf:resource="#unclassified_RNA_viruses_ShiM-2016"/>
+  <FromBaltimoreGroup rdf:resource="#RNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hubei earwig virus 3</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Beihai_mantis_shrimp_virus_5">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#unclassified Riboviria"/>
+  <FromLineage rdf:resource="#unclassified_RNA_viruses_ShiM-2016"/>
+  <FromBaltimoreGroup rdf:resource="#RNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasHost rdf:resource="#Stomatopoda"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Beihai mantis shrimp virus 5</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Stomatopoda">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Klebsiella_phage_vB_KpnS-Carvaje">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#unclassified Caudoviricetes"/>
+  <FromBaltimoreGroup rdf:resource="#uknown"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Klebsiella_pneumoniae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Klebsiella phage vB_KpnS-Carvaje</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Mycobacterium_phage_Coco12">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Gracegardnervirinae"/>
+  <FromLineage rdf:resource="#Cheoctovirus"/>
+  <FromLineage rdf:resource="#unclassified_Cheoctovirus"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Mycolicibacterium_smegmatis_MC2_155"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mycobacterium phage Coco12</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Gracegardnervirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Cheoctovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#unclassified_Cheoctovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Mycolicibacterium_smegmatis_MC2_155">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Wigeon_coronavirus_HKU20">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Nidovirales"/>
+  <FromLineage rdf:resource="#Cornidovirineae"/>
+  <FromLineage rdf:resource="#Coronaviridae"/>
+  <FromLineage rdf:resource="#Orthocoronavirinae"/>
+  <FromLineage rdf:resource="#Deltacoronavirus"/>
+  <FromLineage rdf:resource="#Andecovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Mareca_penelope"/>
+  <HasHost rdf:resource="#Mareca"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wigeon coronavirus HKU20</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Andecovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Mareca_penelope">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Mareca">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Tacaiuma_orthobunyavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Negarnaviricota"/>
+  <FromLineage rdf:resource="#Polyploviricotina"/>
+  <FromLineage rdf:resource="#Ellioviricetes"/>
+  <FromLineage rdf:resource="#Bunyavirales"/>
+  <FromLineage rdf:resource="#Peribunyaviridae"/>
+  <FromLineage rdf:resource="#Orthobunyavirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(-)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Sapajus_apella"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tacaiuma orthobunyavirus</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Sapajus_apella">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Citrobacter_phage_SH3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Autographiviridae"/>
+  <FromLineage rdf:resource="#Studiervirinae"/>
+  <FromLineage rdf:resource="#Kayfunavirus"/>
+  <FromLineage rdf:resource="#Kayfunavirus_SH3"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Citrobacter_freundii"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Citrobacter phage SH3</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Studiervirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Kayfunavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Kayfunavirus_SH3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Citrobacter_freundii">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Mycobacterium_phage_Rando14">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Weiservirinae"/>
+  <FromLineage rdf:resource="#Kratiovirus"/>
+  <FromLineage rdf:resource="#Kratiovirus_rando14"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Mycolicibacterium_smegmatis_MC2_155"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mycobacterium phage Rando14</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Weiservirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Kratiovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Kratiovirus_rando14">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#uncultured_phage_cr130_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Crassvirales"/>
+  <FromLineage rdf:resource="#Suoliviridae"/>
+  <FromLineage rdf:resource="#Oafivirinae"/>
+  <FromLineage rdf:resource="#Chuhaivirus"/>
+  <FromLineage rdf:resource="#Chuhaivirus_simiae"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">uncultured phage cr130_1</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Suoliviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Oafivirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Chuhaivirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Chuhaivirus_simiae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Escherichia_phage_vB_EcoM_VR20">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Straboviridae"/>
+  <FromLineage rdf:resource="#Tevenvirinae"/>
+  <FromLineage rdf:resource="#Gaprivervirus"/>
+  <FromLineage rdf:resource="#Gaprivervirus_vr20"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Escherichia_coli"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Escherichia phage vB_EcoM_VR20</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Gaprivervirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Gaprivervirus_vr20">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Synechococcus_phage_S-CBS2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#unclassified Caudoviricetes"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Synechococcus_sp._CB0204"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Synechococcus phage S-CBS2</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Synechococcus_sp._CB0204">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Micromys_minutus_papillomavirus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cossaviricota"/>
+  <FromLineage rdf:resource="#Papovaviricetes"/>
+  <FromLineage rdf:resource="#Zurhausenvirales"/>
+  <FromLineage rdf:resource="#Papillomaviridae"/>
+  <FromLineage rdf:resource="#Firstpapillomavirinae"/>
+  <FromLineage rdf:resource="#Pipapillomavirus"/>
+  <FromLineage rdf:resource="#Pipapillomavirus_2"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Micromys_minutus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Micromys minutus papillomavirus 1</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Pipapillomavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Pipapillomavirus_2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Micromys_minutus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Saint_Louis_encephalitis_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Kitrinoviricota"/>
+  <FromLineage rdf:resource="#Flasuviricetes"/>
+  <FromLineage rdf:resource="#Amarillovirales"/>
+  <FromLineage rdf:resource="#Flaviviridae"/>
+  <FromLineage rdf:resource="#Flavivirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Culicidae"/>
+  <HasHost rdf:resource="#Culex_quinquefasciatus"/>
+  <HasHost rdf:resource="#Dromaius_novaehollandiae"/>
+  <HasHost rdf:resource="#Dasypodidae"/>
+  <HasHost rdf:resource="#Homo_sapiens"/>
+  <HasHost rdf:resource="#Culex_nigripalpus"/>
+  <HasHost rdf:resource="#Passer_domesticus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Saint Louis encephalitis virus</HasForScientificName>
+</Virus>
+
+<Class rdf:about="#Flasuviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Amarillovirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Flaviviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Flavivirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Culicidae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Culex_quinquefasciatus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Dromaius_novaehollandiae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Dasypodidae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Culex_nigripalpus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Passer_domesticus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Norovirus_Hu/GII-4/Saga1/2006/JP">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Picornavirales"/>
+  <FromLineage rdf:resource="#Caliciviridae"/>
+  <FromLineage rdf:resource="#Norovirus"/>
+  <FromLineage rdf:resource="#Norwalk_virus"/>
+  <FromLineage rdf:resource="#Norovirus_GII"/>
+  <FromLineage rdf:resource="#Norovirus_GII.4"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Homo_sapiens"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Norovirus Hu/GII-4/Saga1/2006/JP</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Bacillus_phage_AR9">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Takahashivirus"/>
+  <FromLineage rdf:resource="#Takahashivirus_PBS1"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Bacillus_subtilis_subsp._subtilis_str._168"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bacillus phage AR9</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Takahashivirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Takahashivirus_PBS1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Bacillus_subtilis_subsp._subtilis_str._168">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Wood_mouse_herpesvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Peploviricota"/>
+  <FromLineage rdf:resource="#Herviviricetes"/>
+  <FromLineage rdf:resource="#Herpesvirales"/>
+  <FromLineage rdf:resource="#Herpesviridae"/>
+  <FromLineage rdf:resource="#Gammaherpesvirinae"/>
+  <FromLineage rdf:resource="#Rhadinovirus"/>
+  <FromLineage rdf:resource="#Murid_gammaherpesvirus_7"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Mus_musculus"/>
+  <HasHost rdf:resource="#Apodemus_sylvaticus"/>
+  <HasHost rdf:resource="#Myodes_glareolus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wood mouse herpesvirus</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Herpesviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Gammaherpesvirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Rhadinovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Murid_gammaherpesvirus_7">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Mus_musculus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Apodemus_sylvaticus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Myodes_glareolus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Pseudomonas_phage_YMC/01/01/P52_PAE_BP">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#unclassified Caudoviricetes"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Pseudomonas_aeruginosa"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pseudomonas phage YMC/01/01/P52_PAE_BP</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Cellulophaga_phage_phiST">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Cbastvirus"/>
+  <FromLineage rdf:resource="#Cbastvirus_ST"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Cellulophaga_sp._MM#3"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cellulophaga phage phiST</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Cbastvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Cbastvirus_ST">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Cellulophaga_sp._MM#3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Klebsiella_phage_Shelby">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Drexlerviridae"/>
+  <FromLineage rdf:resource="#Webervirus"/>
+  <FromLineage rdf:resource="#Webervirus_shelby"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Klebsiella_pneumoniae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Klebsiella phage Shelby</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#Webervirus_shelby">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Sida_golden_mosaic_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Repensiviricetes"/>
+  <FromLineage rdf:resource="#Geplafuvirales"/>
+  <FromLineage rdf:resource="#Geminiviridae"/>
+  <FromLineage rdf:resource="#Begomovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Sida"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sida golden mosaic virus</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Sida">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Lactococcus_phage_66901">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Skunavirus"/>
+  <FromLineage rdf:resource="#Skunavirus_sv66901"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Lactococcus_lactis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lactococcus phage 66901</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#Skunavirus_sv66901">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Prunus_virus_F">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Picornavirales"/>
+  <FromLineage rdf:resource="#Secoviridae"/>
+  <FromLineage rdf:resource="#Comovirinae"/>
+  <FromLineage rdf:resource="#Fabavirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Prunus_avium"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prunus virus F</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Fabavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Prunus_avium">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Human_papillomavirus_142">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cossaviricota"/>
+  <FromLineage rdf:resource="#Papovaviricetes"/>
+  <FromLineage rdf:resource="#Zurhausenvirales"/>
+  <FromLineage rdf:resource="#Papillomaviridae"/>
+  <FromLineage rdf:resource="#Firstpapillomavirinae"/>
+  <FromLineage rdf:resource="#Gammapapillomavirus"/>
+  <FromLineage rdf:resource="#Gammapapillomavirus_10"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Homo_sapiens"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Human papillomavirus 142</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Gammapapillomavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Gammapapillomavirus_10">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Grand_Arbaud_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Negarnaviricota"/>
+  <FromLineage rdf:resource="#Polyploviricotina"/>
+  <FromLineage rdf:resource="#Ellioviricetes"/>
+  <FromLineage rdf:resource="#Bunyavirales"/>
+  <FromLineage rdf:resource="#Phenuiviridae"/>
+  <FromLineage rdf:resource="#Uukuvirus"/>
+  <FromLineage rdf:resource="#Grand_Arbaud_uukuvirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(-)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Argas_reflexus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Grand Arbaud virus</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Uukuvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Grand_Arbaud_uukuvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Argas_reflexus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Pseudomonas_phage_vB_PaeM_SCUT-S1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Pbunavirus"/>
+  <FromLineage rdf:resource="#Pbunavirus_SCUTS1"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Pseudomonas_aeruginosa_PAO1"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pseudomonas phage vB_PaeM_SCUT-S1</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Pbunavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Pbunavirus_SCUTS1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Pseudomonas_aeruginosa_PAO1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Norovirus_Hu/GII-4/Ehime2/2006/JP">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Picornavirales"/>
+  <FromLineage rdf:resource="#Caliciviridae"/>
+  <FromLineage rdf:resource="#Norovirus"/>
+  <FromLineage rdf:resource="#Norwalk_virus"/>
+  <FromLineage rdf:resource="#Norovirus_GII"/>
+  <FromLineage rdf:resource="#Norovirus_GII.4"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Homo_sapiens"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Norovirus Hu/GII-4/Ehime2/2006/JP</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Cowpea_aphid-borne_mosaic_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Stelpaviricetes"/>
+  <FromLineage rdf:resource="#Patatavirales"/>
+  <FromLineage rdf:resource="#Potyviridae"/>
+  <FromLineage rdf:resource="#Potyvirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Vigna_unguiculata"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cowpea aphid-borne mosaic virus</HasForScientificName>
+</Virus>
+
+<Class rdf:about="#Stelpaviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Patatavirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Potyviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Potyvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Vigna_unguiculata">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Hubei_leech_virus_3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#unclassified Riboviria"/>
+  <FromLineage rdf:resource="#unclassified_RNA_viruses_ShiM-2016"/>
+  <FromBaltimoreGroup rdf:resource="#RNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasHost rdf:resource="#Annelida"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hubei leech virus 3</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Annelida">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Tomato_yellow_leaf_curl_Yunnan_betasatellite">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Uknown"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Nicotiana_tabacum"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tomato yellow leaf curl Yunnan betasatellite</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Nicotiana_tabacum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Human_feces_smacovirus_2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Arfiviricetes"/>
+  <FromLineage rdf:resource="#Cremevirales"/>
+  <FromLineage rdf:resource="#Smacoviridae"/>
+  <FromLineage rdf:resource="#Porprismacovirus"/>
+  <FromLineage rdf:resource="#Porprismacovirus_humas1"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA(+/-)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Homo_sapiens"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Human feces smacovirus 2</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#Porprismacovirus_humas1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Cachoeira_Porteira_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Negarnaviricota"/>
+  <FromLineage rdf:resource="#Polyploviricotina"/>
+  <FromLineage rdf:resource="#Ellioviricetes"/>
+  <FromLineage rdf:resource="#Bunyavirales"/>
+  <FromLineage rdf:resource="#Peribunyaviridae"/>
+  <FromLineage rdf:resource="#Orthobunyavirus"/>
+  <FromLineage rdf:resource="#Cachoeira_Porteira_orthobunyavirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(-)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Mus_musculus"/>
+  <HasHost rdf:resource="#Sabethes_glaucodaemon"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cachoeira Porteira virus</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#Cachoeira_Porteira_orthobunyavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Sabethes_glaucodaemon">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#equine_foamy_virus_Equus_caballus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Pararnavirae"/>
+  <FromLineage rdf:resource="#Artverviricota"/>
+  <FromLineage rdf:resource="#Revtraviricetes"/>
+  <FromLineage rdf:resource="#Ortervirales"/>
+  <FromLineage rdf:resource="#Retroviridae"/>
+  <FromLineage rdf:resource="#Spumaretrovirinae"/>
+  <FromLineage rdf:resource="#Equispumavirus"/>
+  <FromLineage rdf:resource="#Equine_foamy_virus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA-RT"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Homo_sapiens"/>
+  <HasHost rdf:resource="#Equus_caballus"/>
+  <HasHost rdf:resource="#Mesocricetus_auratus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">equine foamy virus Equus caballus</HasForScientificName>
+</Virus>
+
+<Subrealm rdf:about="#Pararnavirae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Phylum rdf:about="#Artverviricota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Phylum>
+
+<Class rdf:about="#Revtraviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Ortervirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Retroviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Spumaretrovirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Equispumavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Equine_foamy_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<BaltimoreGroup rdf:about="#ssRNA-RT">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BaltimoreGroup>
+
+<Host rdf:about="#Mesocricetus_auratus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Gordonia_phage_JSwag">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Soupsvirus"/>
+  <FromLineage rdf:resource="#unclassified_Soupsvirus"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Gordonia_terrae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gordonia phage JSwag</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Soupsvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#unclassified_Soupsvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Hubei_diptera_virus_18">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#unclassified Riboviria"/>
+  <FromLineage rdf:resource="#unclassified_RNA_viruses_ShiM-2016"/>
+  <FromBaltimoreGroup rdf:resource="#RNA"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hubei diptera virus 18</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Mycobacterium_phage_Barriga">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Fromanvirus"/>
+  <FromLineage rdf:resource="#unclassified_Fromanvirus"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Mycolicibacterium_smegmatis"/>
+  <HasHost rdf:resource="#Mycolicibacterium_smegmatis_MC2_155"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mycobacterium phage Barriga</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Fromanvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#unclassified_Fromanvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Klebsiella_phage_KP15">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Straboviridae"/>
+  <FromLineage rdf:resource="#Slopekvirus"/>
+  <FromLineage rdf:resource="#Slopekvirus_kp15"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Klebsiella_pneumoniae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Klebsiella phage KP15</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Slopekvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Slopekvirus_kp15">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Gerygone_associated_gemycircularvirus_2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Repensiviricetes"/>
+  <FromLineage rdf:resource="#Geplafuvirales"/>
+  <FromLineage rdf:resource="#Genomoviridae"/>
+  <FromLineage rdf:resource="#Gemycircularvirus"/>
+  <FromLineage rdf:resource="#Gemycircularvirus_geras2"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA(+/-)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Gerygone_albofrontata"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gerygone associated gemycircularvirus 2</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#Gemycircularvirus_geras2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Gerygone_albofrontata">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Erwinia_phage_EtG">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Peduoviridae"/>
+  <FromLineage rdf:resource="#Eganvirus"/>
+  <FromLineage rdf:resource="#Eganvirus_EtG"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Erwinia_tracheiphila"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Erwinia phage EtG</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Peduoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Eganvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Eganvirus_EtG">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Erwinia_tracheiphila">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Brassica_campestris_chrysovirus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Duplornaviricota"/>
+  <FromLineage rdf:resource="#Chrymotiviricetes"/>
+  <FromLineage rdf:resource="#Ghabrivirales"/>
+  <FromLineage rdf:resource="#Chrysoviridae"/>
+  <FromLineage rdf:resource="#Alphachrysovirus"/>
+  <FromLineage rdf:resource="#Alphachrysovirus_brassicae"/>
+  <FromBaltimoreGroup rdf:resource="#dsRNA"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Brassica_rapa_var._purpuraria"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Brassica campestris chrysovirus 1</HasForScientificName>
+</Virus>
+
+<Phylum rdf:about="#Duplornaviricota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Phylum>
+
+<Class rdf:about="#Chrymotiviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Ghabrivirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Chrysoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Alphachrysovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Alphachrysovirus_brassicae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Brassica_rapa_var._purpuraria">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Hyphantria_cunea_nucleopolyhedrovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Naldaviricetes"/>
+  <FromLineage rdf:resource="#Lefavirales"/>
+  <FromLineage rdf:resource="#Baculoviridae"/>
+  <FromLineage rdf:resource="#Alphabaculovirus"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Lepidoptera"/>
+  <HasHost rdf:resource="#Hyphantria_cunea"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hyphantria cunea nucleopolyhedrovirus</HasForScientificName>
+</Virus>
+
+<Class rdf:about="#Naldaviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Lefavirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Baculoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Alphabaculovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Lepidoptera">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Hyphantria_cunea">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Foot-and-mouth_disease_virus_C4">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Picornavirales"/>
+  <FromLineage rdf:resource="#Picornaviridae"/>
+  <FromLineage rdf:resource="#Caphthovirinae"/>
+  <FromLineage rdf:resource="#Aphthovirus"/>
+  <FromLineage rdf:resource="#Foot-and-mouth_disease_virus"/>
+  <FromLineage rdf:resource="#Foot_and_mouth_disease_virus_C"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Ovis_aries"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Foot-and-mouth disease virus C4</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#Foot-and-mouth_disease_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Subgenus rdf:about="#Foot_and_mouth_disease_virus_C">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Common_bottlenose_dolphin_gammaherpesvirus_1_strain_Sarasota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Peploviricota"/>
+  <FromLineage rdf:resource="#Herviviricetes"/>
+  <FromLineage rdf:resource="#Herpesvirales"/>
+  <FromLineage rdf:resource="#Herpesviridae"/>
+  <FromLineage rdf:resource="#Gammaherpesvirinae"/>
+  <FromLineage rdf:resource="#Bossavirus"/>
+  <FromLineage rdf:resource="#Delphinid_gammaherpesvirus_1"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Tursiops_truncatus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Common bottlenose dolphin gammaherpesvirus 1 strain Sarasota</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Bossavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Delphinid_gammaherpesvirus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Tursiops_truncatus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Melon_chlorotic_spot_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Negarnaviricota"/>
+  <FromLineage rdf:resource="#Polyploviricotina"/>
+  <FromLineage rdf:resource="#Ellioviricetes"/>
+  <FromLineage rdf:resource="#Bunyavirales"/>
+  <FromLineage rdf:resource="#Phenuiviridae"/>
+  <FromLineage rdf:resource="#Tenuivirus"/>
+  <FromLineage rdf:resource="#Melon_tenuivirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(-)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Cucumis_melo"/>
+  <HasHost rdf:resource="#Vigna_unguiculata"/>
+  <HasHost rdf:resource="#Solanum_lycopersicum"/>
+  <HasHost rdf:resource="#Nicotiana_tabacum"/>
+  <HasHost rdf:resource="#Nicotiana_benthamiana"/>
+  <HasHost rdf:resource="#Petunia_x_hybrida"/>
+  <HasHost rdf:resource="#Chenopodium_quinoa"/>
+  <HasHost rdf:resource="#Chenopodium_amaranticolor"/>
+  <HasHost rdf:resource="#Nicotiana_clevelandii"/>
+  <HasHost rdf:resource="#Physalis_pubescens"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Melon chlorotic spot virus</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Tenuivirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Melon_tenuivirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Cucumis_melo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Solanum_lycopersicum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Nicotiana_benthamiana">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Petunia_x_hybrida">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Chenopodium_quinoa">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Chenopodium_amaranticolor">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Nicotiana_clevelandii">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Physalis_pubescens">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Marinomonas_phage_CB5A">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Autographiviridae"/>
+  <FromLineage rdf:resource="#Colwellvirinae"/>
+  <FromLineage rdf:resource="#Murciavirus"/>
+  <FromLineage rdf:resource="#Murciavirus_CB5A"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Marinomonas_sp."/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Marinomonas phage CB5A</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Colwellvirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Murciavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Murciavirus_CB5A">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Marinomonas_sp.">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Synechococcus_phage_S-CAM1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Kyanoviridae"/>
+  <FromLineage rdf:resource="#Anaposvirus"/>
+  <FromLineage rdf:resource="#Anaposvirus_socalone"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Synechococcus_sp."/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Synechococcus phage S-CAM1</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Kyanoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Anaposvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Anaposvirus_socalone">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Synechococcus_sp.">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Equus_caballus_papillomavirus_6">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cossaviricota"/>
+  <FromLineage rdf:resource="#Papovaviricetes"/>
+  <FromLineage rdf:resource="#Zurhausenvirales"/>
+  <FromLineage rdf:resource="#Papillomaviridae"/>
+  <FromLineage rdf:resource="#Firstpapillomavirinae"/>
+  <FromLineage rdf:resource="#Dyorhopapillomavirus"/>
+  <FromLineage rdf:resource="#Dyorhopapillomavirus_1"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Equus_ferus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Equus caballus papillomavirus 6</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Dyorhopapillomavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Dyorhopapillomavirus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Equus_ferus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Corynebacterium_phage_phi674">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Ikedavirus"/>
+  <FromLineage rdf:resource="#Ikedavirus_phi674"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Corynebacterium_glutamicum"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Corynebacterium phage phi674</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Ikedavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Ikedavirus_phi674">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Corynebacterium_glutamicum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Chimpanzee_faeces_associated_microphage_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Sangervirae"/>
+  <FromLineage rdf:resource="#Phixviricota"/>
+  <FromLineage rdf:resource="#Malgrandaviricetes"/>
+  <FromLineage rdf:resource="#Petitvirales"/>
+  <FromLineage rdf:resource="#Microviridae"/>
+  <FromLineage rdf:resource="#unclassified Microviridae"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chimpanzee faeces associated microphage 1</HasForScientificName>
+</Virus>
+
+<Subrealm rdf:about="#Sangervirae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Phylum rdf:about="#Phixviricota">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Phylum>
+
+<Class rdf:about="#Malgrandaviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Petitvirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Microviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Family rdf:about="#unclassified Microviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Virus rdf:about="#Shewanella_phage_X14">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#unclassified Caudoviricetes"/>
+  <FromBaltimoreGroup rdf:resource="#uknown"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Shewanella_inventionis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Shewanella phage X14</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Shewanella_inventionis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Streptococcus_phage_IPP52">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#unclassified Caudoviricetes"/>
+  <FromBaltimoreGroup rdf:resource="#uknown"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Streptococcus_pneumoniae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Streptococcus phage IPP52</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Streptococcus_pneumoniae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Citrus_sudden_death-associated_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Kitrinoviricota"/>
+  <FromLineage rdf:resource="#Alsuviricetes"/>
+  <FromLineage rdf:resource="#Tymovirales"/>
+  <FromLineage rdf:resource="#Tymoviridae"/>
+  <FromLineage rdf:resource="#Marafivirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Citrus_sinensis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Citrus sudden death-associated virus</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Tymoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Marafivirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Citrus_sinensis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Fire_ant_associated_circular_virus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#unclassified_viruses"/>
+  <FromLineage rdf:resource="#unclassified_DNA_viruses"/>
+  <FromLineage rdf:resource="#unclassified_ssDNA_viruses"/>
+  <FromLineage rdf:resource="#Cruciviridae"/>
+  <FromLineage rdf:resource="#Crucivirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Solenopsis_invicta"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fire ant associated circular virus 1</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Cruciviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Crucivirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Solenopsis_invicta">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Macaca_fascicularis_papillomavirus_3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cossaviricota"/>
+  <FromLineage rdf:resource="#Papovaviricetes"/>
+  <FromLineage rdf:resource="#Zurhausenvirales"/>
+  <FromLineage rdf:resource="#Papillomaviridae"/>
+  <FromLineage rdf:resource="#Firstpapillomavirinae"/>
+  <FromLineage rdf:resource="#Alphapapillomavirus"/>
+  <FromLineage rdf:resource="#Alphapapillomavirus_12"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Macaca_fascicularis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Macaca fascicularis papillomavirus 3</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Alphapapillomavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Alphapapillomavirus_12">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Macaca_fascicularis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Pteropus_associated_gemycircularvirus_10">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Repensiviricetes"/>
+  <FromLineage rdf:resource="#Geplafuvirales"/>
+  <FromLineage rdf:resource="#Genomoviridae"/>
+  <FromLineage rdf:resource="#Gemycircularvirus"/>
+  <FromLineage rdf:resource="#Gemycircularvirus_ptero10"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Pteropus_tonganus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pteropus associated gemycircularvirus 10</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#Gemycircularvirus_ptero10">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Pteropus_tonganus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Parrot_bornavirus_2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Negarnaviricota"/>
+  <FromLineage rdf:resource="#Haploviricotina"/>
+  <FromLineage rdf:resource="#Monjiviricetes"/>
+  <FromLineage rdf:resource="#Mononegavirales"/>
+  <FromLineage rdf:resource="#Bornaviridae"/>
+  <FromLineage rdf:resource="#Orthobornavirus"/>
+  <FromLineage rdf:resource="#Orthobornavirus_alphapsittaciforme"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(-)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Gallus_gallus"/>
+  <HasHost rdf:resource="#Nymphicus_hollandicus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Parrot bornavirus 2</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Bornaviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Orthobornavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Orthobornavirus_alphapsittaciforme">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Gallus_gallus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Nymphicus_hollandicus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Beihai_tombus-like_virus_15">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#unclassified Riboviria"/>
+  <FromLineage rdf:resource="#unclassified_RNA_viruses_ShiM-2016"/>
+  <FromBaltimoreGroup rdf:resource="#RNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Beihai tombus-like virus 15</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Puma_feline_foamy_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Pararnavirae"/>
+  <FromLineage rdf:resource="#Artverviricota"/>
+  <FromLineage rdf:resource="#Revtraviricetes"/>
+  <FromLineage rdf:resource="#Ortervirales"/>
+  <FromLineage rdf:resource="#Retroviridae"/>
+  <FromLineage rdf:resource="#Spumaretrovirinae"/>
+  <FromLineage rdf:resource="#Felispumavirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA-RT"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Puma_concolor"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Puma feline foamy virus</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Felispumavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Puma_concolor">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Bacillus_phage_Zuko">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Herelleviridae"/>
+  <FromLineage rdf:resource="#Bastillevirinae"/>
+  <FromLineage rdf:resource="#Wphvirus"/>
+  <FromLineage rdf:resource="#unclassified_Wphvirus"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Bacillus_thuringiensis_serovar_kurstaki"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bacillus phage Zuko</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Herelleviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Bastillevirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Wphvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#unclassified_Wphvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Bacillus_thuringiensis_serovar_kurstaki">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#La_Gloria_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Negarnaviricota"/>
+  <FromLineage rdf:resource="#Polyploviricotina"/>
+  <FromLineage rdf:resource="#Ellioviricetes"/>
+  <FromLineage rdf:resource="#Bunyavirales"/>
+  <FromLineage rdf:resource="#Phenuiviridae"/>
+  <FromLineage rdf:resource="#Phlebovirus"/>
+  <FromLineage rdf:resource="#La_Gloria_phlebovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(-)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Psychodopygus_panamensis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">La Gloria virus</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#La_Gloria_phlebovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Psychodopygus_panamensis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Radish_mosaic_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Picornavirales"/>
+  <FromLineage rdf:resource="#Secoviridae"/>
+  <FromLineage rdf:resource="#Comovirinae"/>
+  <FromLineage rdf:resource="#Comovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Brassicaceae"/>
+  <HasHost rdf:resource="#Raphanus_sativus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Radish mosaic virus</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Comovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Brassicaceae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Raphanus_sativus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Gordonia_phage_Clown">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Clownvirus"/>
+  <FromLineage rdf:resource="#Clownvirus_clown"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Gordonia_terrae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gordonia phage Clown</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Clownvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Clownvirus_clown">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#New_World_begomovirus_associated_satellite_DNA_isolate_412N3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Uknown"/>
+  <FromLineage rdf:resource="#New_World_begomovirus_associated_satellite_DNA"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Begomovirus"/>
+  <HasHost rdf:resource="#Malvastrum_coromandelianum"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">New World begomovirus associated satellite DNA isolate 412N3</HasForScientificName>
+</Virus>
+
+<Subgenus rdf:about="#New_World_begomovirus_associated_satellite_DNA">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Malvastrum_coromandelianum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Brevibacillus_phage_Jenst">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Jenstvirus"/>
+  <FromLineage rdf:resource="#Jenstvirus_jenst"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Brevibacillus_laterosporus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Brevibacillus phage Jenst</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Jenstvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Jenstvirus_jenst">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Brevibacillus_laterosporus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Mycobacterium_phage_Henry">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Kostyavirus"/>
+  <FromLineage rdf:resource="#Kostyavirus_toto"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Mycolicibacterium_smegmatis_MC2_155"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mycobacterium phage Henry</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Kostyavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Kostyavirus_toto">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Murine_coronavirus_MHV-1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Pisoniviricetes"/>
+  <FromLineage rdf:resource="#Nidovirales"/>
+  <FromLineage rdf:resource="#Cornidovirineae"/>
+  <FromLineage rdf:resource="#Coronaviridae"/>
+  <FromLineage rdf:resource="#Orthocoronavirinae"/>
+  <FromLineage rdf:resource="#Betacoronavirus"/>
+  <FromLineage rdf:resource="#Embecovirus"/>
+  <FromLineage rdf:resource="#Murine_coronavirus"/>
+  <FromLineage rdf:resource="#Murine_hepatitis_virus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Mus_musculus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Murine coronavirus MHV-1</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Betacoronavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Genus rdf:about="#Embecovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Murine_coronavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Subgenus rdf:about="#Murine_hepatitis_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Gordonia_phage_VanDeWege">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Wizardvirus"/>
+  <FromLineage rdf:resource="#Wizardvirus_vandewege"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Gordonia_terrae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gordonia phage VanDeWege</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Wizardvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Wizardvirus_vandewege">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Chimpanzee_associated_porprismacovirus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Arfiviricetes"/>
+  <FromLineage rdf:resource="#Cremevirales"/>
+  <FromLineage rdf:resource="#Smacoviridae"/>
+  <FromLineage rdf:resource="#Porprismacovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Pan_troglodytes"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chimpanzee associated porprismacovirus 1</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Pan_troglodytes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Acinetobacter_phage_YMC11/11/R3177">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Vieuvirus"/>
+  <FromLineage rdf:resource="#Vieuvirus_R3177"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Acinetobacter_baumannii"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Acinetobacter phage YMC11/11/R3177</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Vieuvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Vieuvirus_R3177">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Acinetobacter_baumannii">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Salmonella_phage_vB-SalM-SJ2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Ackermannviridae"/>
+  <FromLineage rdf:resource="#Cvivirinae"/>
+  <FromLineage rdf:resource="#Kuttervirus"/>
+  <FromLineage rdf:resource="#Kuttervirus_SJ2"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Salmonella_enterica_subsp._enterica_serovar_Typhimurium"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Salmonella phage vB-SalM-SJ2</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Ackermannviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Subfamily rdf:about="#Cvivirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Kuttervirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Kuttervirus_SJ2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Euphorbia_caput-medusae_latent_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Repensiviricetes"/>
+  <FromLineage rdf:resource="#Geplafuvirales"/>
+  <FromLineage rdf:resource="#Geminiviridae"/>
+  <FromLineage rdf:resource="#Capulavirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Euphorbia_caput-medusae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Euphorbia caput-medusae latent virus</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Capulavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Euphorbia_caput-medusae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Alces_alces_faeces_associated_microvirus_MP12_5423">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Sangervirae"/>
+  <FromLineage rdf:resource="#Phixviricota"/>
+  <FromLineage rdf:resource="#Malgrandaviricetes"/>
+  <FromLineage rdf:resource="#Petitvirales"/>
+  <FromLineage rdf:resource="#Microviridae"/>
+  <FromLineage rdf:resource="#unclassified Microviridae"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alces alces faeces associated microvirus MP12 5423</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Leishmania_RNA_virus_1_-_4">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Duplornaviricota"/>
+  <FromLineage rdf:resource="#Chrymotiviricetes"/>
+  <FromLineage rdf:resource="#Ghabrivirales"/>
+  <FromLineage rdf:resource="#Totiviridae"/>
+  <FromLineage rdf:resource="#Leishmaniavirus"/>
+  <FromLineage rdf:resource="#Leishmania_RNA_virus_1"/>
+  <FromBaltimoreGroup rdf:resource="#dsRNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Leishmania_braziliensis_guyanensis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Leishmania RNA virus 1 - 4</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Totiviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Leishmaniavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Leishmania_RNA_virus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Leishmania_braziliensis_guyanensis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Mycobacterium_phage_Pepe">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Fromanvirus"/>
+  <FromLineage rdf:resource="#unclassified_Fromanvirus"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Mycolicibacterium_smegmatis_MC2_155"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mycobacterium phage Pepe</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Eptesicus_fuscus_gammaherpesvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Peploviricota"/>
+  <FromLineage rdf:resource="#Herviviricetes"/>
+  <FromLineage rdf:resource="#Herpesvirales"/>
+  <FromLineage rdf:resource="#Herpesviridae"/>
+  <FromLineage rdf:resource="#Gammaherpesvirinae"/>
+  <FromLineage rdf:resource="#unclassified Gammaherpesvirinae"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Eptesicus_fuscus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eptesicus fuscus gammaherpesvirus</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#unclassified Gammaherpesvirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Host rdf:about="#Eptesicus_fuscus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Vibrio_phage_1.204.O._10N.222.46.F12">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Autographiviridae"/>
+  <FromLineage rdf:resource="#Cyclitvirus"/>
+  <FromLineage rdf:resource="#Cyclitvirus_cyclit"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Vibrio_cyclitrophicus"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vibrio phage 1.204.O._10N.222.46.F12</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Cyclitvirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Cyclitvirus_cyclit">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Vibrio_cyclitrophicus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Mycobacterium_phage_ADLER_F1725">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#unclassified Caudoviricetes"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Mycobacteroides_abscessus_subsp._bolletii_F1725"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mycobacterium phage ADLER F1725</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Mycobacteroides_abscessus_subsp._bolletii_F1725">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Porcine_associated_porprismacovirus_5">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Arfiviricetes"/>
+  <FromLineage rdf:resource="#Cremevirales"/>
+  <FromLineage rdf:resource="#Smacoviridae"/>
+  <FromLineage rdf:resource="#Porprismacovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Sus_scrofa"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Porcine associated porprismacovirus 5</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Sichuan_takin_astrovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Stelpaviricetes"/>
+  <FromLineage rdf:resource="#Stellavirales"/>
+  <FromLineage rdf:resource="#Astroviridae"/>
+  <FromLineage rdf:resource="#unclassified Astroviridae"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Budorcas_taxicolor_tibetana"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sichuan takin astrovirus</HasForScientificName>
+</Virus>
+
+<Subrealm rdf:about="#Stellavirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Astroviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Family rdf:about="#unclassified Astroviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Host rdf:about="#Budorcas_taxicolor_tibetana">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Rousettus_leschenaultii_bocaparvovirus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cossaviricota"/>
+  <FromLineage rdf:resource="#Quintoviricetes"/>
+  <FromLineage rdf:resource="#Piccovirales"/>
+  <FromLineage rdf:resource="#Parvoviridae"/>
+  <FromLineage rdf:resource="#Parvovirinae"/>
+  <FromLineage rdf:resource="#Bocaparvovirus"/>
+  <FromLineage rdf:resource="#Chiropteran_bocaparvovirus_5"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Rousettus_leschenaultii"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rousettus leschenaultii bocaparvovirus 1</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Parvovirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Bocaparvovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Chiropteran_bocaparvovirus_5">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Rousettus_leschenaultii">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Rodent_associated_circovirus_4">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Arfiviricetes"/>
+  <FromLineage rdf:resource="#Cirlivirales"/>
+  <FromLineage rdf:resource="#Circoviridae"/>
+  <FromLineage rdf:resource="#Circovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Orientallactaga_sibirica"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rodent associated circovirus 4</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Circovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Orientallactaga_sibirica">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Vibrio_phage_1.238.A._10N.261.52.F10">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Schitoviridae"/>
+  <FromLineage rdf:resource="#Pariacacavirus"/>
+  <FromLineage rdf:resource="#Pariacacavirus_1238A"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Vibrio_breoganii"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vibrio phage 1.238.A._10N.261.52.F10</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Pariacacavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Pariacacavirus_1238A">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Vibrio_breoganii">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Cabbage_leaf_curl_Jamaica_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Monodnaviria"/>
+  <FromLineage rdf:resource="#Shotokuvirae"/>
+  <FromLineage rdf:resource="#Cressdnaviricota"/>
+  <FromLineage rdf:resource="#Repensiviricetes"/>
+  <FromLineage rdf:resource="#Geplafuvirales"/>
+  <FromLineage rdf:resource="#Geminiviridae"/>
+  <FromLineage rdf:resource="#Begomovirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssDNA"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Brassica_oleracea"/>
+  <HasHost rdf:resource="#Brassica_oleracea_var._botrytis"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cabbage leaf curl Jamaica virus</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Brassica_oleracea">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Brassica_oleracea_var._botrytis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Hubei_odonate_virus_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#unclassified Riboviria"/>
+  <FromLineage rdf:resource="#unclassified_RNA_viruses_ShiM-2016"/>
+  <FromBaltimoreGroup rdf:resource="#RNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hubei odonate virus 1</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Lettuce_mosaic_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Pisuviricota"/>
+  <FromLineage rdf:resource="#Stelpaviricetes"/>
+  <FromLineage rdf:resource="#Patatavirales"/>
+  <FromLineage rdf:resource="#Potyviridae"/>
+  <FromLineage rdf:resource="#Potyvirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Spinacia_oleracea"/>
+  <HasHost rdf:resource="#Cicer_arietinum"/>
+  <HasHost rdf:resource="#Pisum_sativum"/>
+  <HasHost rdf:resource="#Carthamus_tinctorius"/>
+  <HasHost rdf:resource="#Lactuca"/>
+  <HasHost rdf:resource="#Lactuca_sativa"/>
+  <HasHost rdf:resource="#Cichorium_intybus"/>
+  <HasHost rdf:resource="#Eustoma_grandiflorum"/>
+  <HasHost rdf:resource="#Cichorium_endivia"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lettuce mosaic virus</HasForScientificName>
+</Virus>
+
+<Host rdf:about="#Spinacia_oleracea">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Cicer_arietinum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Pisum_sativum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Carthamus_tinctorius">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Lactuca">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Lactuca_sativa">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Cichorium_intybus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Eustoma_grandiflorum">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Host rdf:about="#Cichorium_endivia">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Klebsiella_phage_KPN_N98">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Casjensviridae"/>
+  <FromLineage rdf:resource="#Yonseivirus"/>
+  <FromLineage rdf:resource="#Yonseivirus_N137"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Klebsiella_pneumoniae"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Klebsiella phage KPN N98</HasForScientificName>
+</Virus>
+
+<Family rdf:about="#Casjensviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Yonseivirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Yonseivirus_N137">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Virus rdf:about="#Aeromonas_phage_65">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Straboviridae"/>
+  <FromLineage rdf:resource="#Emmerichvirinae"/>
+  <FromLineage rdf:resource="#Ishigurovirus"/>
+  <FromLineage rdf:resource="#Ishigurovirus_osborne"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Aeromonas_salmonicida"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Aeromonas phage 65</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Emmerichvirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Ishigurovirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Ishigurovirus_osborne">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Aeromonas_salmonicida">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Propionibacterium_phage_PHL073M02">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Pahexavirus"/>
+  <FromLineage rdf:resource="#Pahexavirus_PHL151N00"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Cutibacterium_acnes"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Propionibacterium phage PHL073M02</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Pahexavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Pahexavirus_PHL151N00">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Cutibacterium_acnes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Ethiopian_tobacco_bushy_top_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Kitrinoviricota"/>
+  <FromLineage rdf:resource="#Tolucaviricetes"/>
+  <FromLineage rdf:resource="#Tolivirales"/>
+  <FromLineage rdf:resource="#Tombusviridae"/>
+  <FromLineage rdf:resource="#Calvusvirinae"/>
+  <FromLineage rdf:resource="#Umbravirus"/>
+  <FromBaltimoreGroup rdf:resource="#ssRNA(+)"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Nicotiana_benthamiana"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ethiopian tobacco bushy top virus</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Calvusvirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Umbravirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Virus rdf:about="#Hubei_tetragnatha_maxillosa_virus_5">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#unclassified Riboviria"/>
+  <FromLineage rdf:resource="#unclassified_RNA_viruses_ShiM-2016"/>
+  <FromBaltimoreGroup rdf:resource="#RNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#root"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hubei tetragnatha maxillosa virus 5</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Mycobacterium_phage_SimranZ1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Gracegardnervirinae"/>
+  <FromLineage rdf:resource="#Cheoctovirus"/>
+  <FromLineage rdf:resource="#unclassified_Cheoctovirus"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Mycolicibacterium_smegmatis_MC2_155"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mycobacterium phage SimranZ1</HasForScientificName>
+</Virus>
+
+<Virus rdf:about="#Salmonella_phage_FelixO1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Ounavirinae"/>
+  <FromLineage rdf:resource="#Felixounavirus"/>
+  <FromLineage rdf:resource="#Felixounavirus_felixO1"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Salmonella"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Salmonella phage FelixO1</HasForScientificName>
+</Virus>
+
+<Subfamily rdf:about="#Ounavirinae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subfamily>
+
+<Genus rdf:about="#Felixounavirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Felixounavirus_felixO1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Salmonella">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Chobar_Gorge_virus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Riboviria"/>
+  <FromLineage rdf:resource="#Orthornavirae"/>
+  <FromLineage rdf:resource="#Duplornaviricota"/>
+  <FromLineage rdf:resource="#Resentoviricetes"/>
+  <FromLineage rdf:resource="#Reovirales"/>
+  <FromLineage rdf:resource="#Sedoreoviridae"/>
+  <FromLineage rdf:resource="#Orbivirus"/>
+  <FromBaltimoreGroup rdf:resource="#dsRNA"/>
+  <HasGenomeType rdf:resource="#Segmented"/>
+  <HasHost rdf:resource="#Mesocricetus_auratus"/>
+  <HasHost rdf:resource="#Ornithodoros_sp."/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chobar Gorge virus</HasForScientificName>
+</Virus>
+
+<Class rdf:about="#Resentoviricetes">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Class>
+
+<Subrealm rdf:about="#Reovirales">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subrealm>
+
+<Family rdf:about="#Sedoreoviridae">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Family>
+
+<Genus rdf:about="#Orbivirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Host rdf:about="#Ornithodoros_sp.">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
+
+<Virus rdf:about="#Serratia_phage_Moabite">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <FromLineage rdf:resource="#Duplodnaviria"/>
+  <FromLineage rdf:resource="#Heunggongvirae"/>
+  <FromLineage rdf:resource="#Uroviricota"/>
+  <FromLineage rdf:resource="#Caudoviricetes"/>
+  <FromLineage rdf:resource="#Moabitevirus"/>
+  <FromLineage rdf:resource="#Moabitevirus_moabite"/>
+  <FromBaltimoreGroup rdf:resource="#dsDNA"/>
+  <HasGenomeType rdf:resource="#Non-segmented"/>
+  <HasHost rdf:resource="#Serratia_marcescens"/>
+  <HasForScientificName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Serratia phage Moabite</HasForScientificName>
+</Virus>
+
+<Genus rdf:about="#Moabitevirus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Genus>
+
+<Subgenus rdf:about="#Moabitevirus_moabite">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subgenus>
+
+<Host rdf:about="#Serratia_marcescens">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Host>
 
 
 </rdf:RDF>
