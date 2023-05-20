@@ -2,6 +2,7 @@ import random
 import requests
 from bs4 import BeautifulSoup
 from owlready2 import *
+from tqdm import tqdm
 
 # Criação/Carregamento da ontologia
 onto = get_ontology("file://virus_host_ontology.owl").load()
@@ -15,7 +16,7 @@ def cleanScientificName(string):
 
 def cleanBaltimoreGroup(string):
     if string is None:
-        return "uknown"
+        return "unknown"
 
     if ":" in string:
         cleaned_string = string.split(":")[1]
@@ -54,7 +55,7 @@ def GetLineage(entry):
     elif "virus" in entry and " " in entry:
         return (Subgenus(entry.replace(" ", "_")))
     else:
-        return (Realm("Uknown"))
+        return (Realm("unclassified"))
 
 # Função para obter os dados dos vírus
 def GetVirusData():
@@ -69,10 +70,10 @@ def GetVirusData():
     virus_table = soup.find("table", {"class": "view"})
     virus_rows = virus_table.find_all("tr")[2:]  # Ignorar o cabeçalho da tabela
 
-    viruses = random.sample(virus_rows, 150)
+    viruses = random.sample(virus_rows, 200)
 
     virus_data = []
-    for virus_row in viruses:
+    for virus_row in tqdm(viruses):
         link = virus_row.find("a").get("href")
         response = requests.get(baseUrl + link)
         soup = BeautifulSoup(response.text, "html.parser")
@@ -97,7 +98,7 @@ def GetVirusData():
                     hosts.append(cleanScientificName(info))
 
         scientific_name = cleanScientificName(data.get("Scientific Name"))
-        print("Scientific Name:", scientific_name)
+        #print("Scientific Name:", scientific_name)
         lineage = data.get("Lineage").split("; ")[1:]
         baltimore_group = cleanBaltimoreGroup(data.get("Baltimore Group"))
         genome_type = data.get("Genome Type")
@@ -113,7 +114,10 @@ def GetVirusData():
 
 with onto:
     # Classes
-    class Virus(Thing):
+    class Species(Thing):
+        pass
+    
+    class Virus(Species):
         pass
 
     class BaltimoreGroup(Thing):
@@ -122,7 +126,7 @@ with onto:
     class GenomeType(Thing):
         pass
 
-    class Host(Thing):
+    class Host(Species):
         pass
 
     class Realm(Thing):
@@ -169,7 +173,7 @@ with onto:
 
     # Propriedades
     class HasForScientificName(DataProperty):
-        domain = [Virus]
+        domain = [Species]
         range = [str]
 
     class FromLineage(ObjectProperty):
@@ -227,6 +231,7 @@ with onto:
         for entry in hosts:
             host = Host(entry.replace(' ', '_'))
             virus.HasHost.append(host)
+            host.HasForScientificName.append(entry)
             host.HostThoseVirus.append(virus)
 
 # Salvando a ontologia em um arquivo .owl
