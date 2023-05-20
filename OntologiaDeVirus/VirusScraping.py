@@ -218,6 +218,8 @@ with onto:
         virus.HasForScientificName.append(scientific_name)
 
         for entry in lineage:
+            if GetLineage(entry) is None:
+                continue
             virus.FromLineage.append(GetLineage(entry))
 
         baltimoreGroup = BaltimoreGroup(baltimore_group)
