@@ -116,11 +116,13 @@ with onto:
         domain = [Host]
         range = [Virus]
         inverse_property = onto.HasHost
-        
+
     for individual in tqdm(Virus.instances()):
-        if individual.HasHost.first() == None:
-            print(individual.HasHost)
-            destroy_entity(individual)
+        if len(individual.HasHost) < 2:
+            if Host("Homo_sapiens") in individual.HasHost:
+                print(individual)
+            else:
+                destroy_entity(individual)
     # Salvando a ontologia em um arquivo .owl
 onto.save(file="virus_host_ontology.owl", format="rdfxml")
 
