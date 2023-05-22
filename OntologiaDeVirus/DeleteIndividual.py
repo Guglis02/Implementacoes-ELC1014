@@ -15,6 +15,60 @@ with onto:
     class Virus(Species):
         pass
 
+    class BaltimoreGroup(Thing):
+        pass
+
+    class GenomeType(Thing):
+        pass
+
+    class Host(Species):
+        pass
+
+    class Realm(Thing):
+        pass
+
+    class Subrealm(Realm):
+        pass
+
+    class Kingdom(Subrealm):
+        pass
+
+    class Subkingdom(Kingdom):
+        pass
+
+    class Phylum(Subkingdom):
+        pass
+
+    class Subphylum(Phylum):
+        pass
+
+    class Class(Subphylum):
+        pass
+
+    class Subclass(Class):
+        pass
+
+    class Order(Subclass):
+        pass
+
+    class Suborder(Order):
+        pass
+
+    class Family(Suborder):
+        pass
+
+    class Subfamily(Family):
+        pass
+
+    class Genus(Subfamily):
+        pass
+
+    class Subgenus(Genus):
+        pass
+
+    class HostCategory(Thing):
+        pass
+
     # Propriedades
     class HasForScientificName(DataProperty):
         domain = [Species]
@@ -24,13 +78,49 @@ with onto:
         domain = [Virus]
         range = [str]
 
+    class FromLineage(ObjectProperty):
+        domain = [Virus]
+        range = [Realm]
+
+    class FromBaltimoreGroup(ObjectProperty):
+        domain = [Virus]
+        range = [BaltimoreGroup]
+        inverse_property = onto.BelongsToThisGroup
+
+    class HasGenomeType(ObjectProperty):
+        domain = [Virus]
+        range = [GenomeType]
+        inverse_property = onto.BelongsToGenomeType
+
+    class HasHost(ObjectProperty):
+        domain = [Virus]
+        range = [Host]
+        inverse_property = onto.HostThoseVirus
+
+    class HasHostOfThisCategory(ObjectProperty):
+        domain = [Virus]
+        range = [HostCategory]
+
+    # Propriedadas inversas
+    class BelongsToThisGroup(ObjectProperty):
+        domain = [BaltimoreGroup]
+        range = [Virus]
+        inverse_property = onto.FromBaltimoreGroup
+
+    class HasThisGenomeType(ObjectProperty):
+        domain = [GenomeType]
+        range = [Virus]
+        inverse_property = onto.HasGenomeType
+
+    class HostThoseVirus(ObjectProperty):
+        domain = [Host]
+        range = [Virus]
+        inverse_property = onto.HasHost
+        
     for individual in tqdm(Virus.instances()):
-        if individual.HasForAbbreviatedName == [''] or []:
-            print(individual.HasForAbbreviatedName)
-            individual.HasForAbbreviatedName.remove(individual.HasForAbbreviatedName.first())
-        if len(individual.HasForAbbreviatedName) > 1:
-            print(individual.HasForAbbreviatedName)
-            individual.HasForAbbreviatedName.remove(individual.HasForAbbreviatedName.first())
+        if individual.HasHost.first() == None:
+            print(individual.HasHost)
+            destroy_entity(individual)
     # Salvando a ontologia em um arquivo .owl
 onto.save(file="virus_host_ontology.owl", format="rdfxml")
 
