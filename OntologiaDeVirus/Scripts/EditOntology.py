@@ -153,11 +153,10 @@ with onto:
         inverse_property = onto.HasHost
 
     for individual in tqdm(Virus.instances()):
-        if individual.HasHost) < 2:
-            if Host("Homo_sapiens") in individual.HasHost:
-                print(individual)
-            else:
-                destroy_entity(individual)
+        # Caso o vírus tenha alguma informação específica
+        # (Não necessariamente só funciona pra virus, basta trocar a classe na hora de chamar o instances())
+            # Executa determinada alteração
+
     # Salvando a ontologia em um arquivo .owl
 onto.save(file="virus_host_ontology.owl", format="rdfxml")
 

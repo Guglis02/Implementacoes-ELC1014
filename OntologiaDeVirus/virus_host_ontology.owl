@@ -44,6 +44,7 @@
     <!-- file://virus_host_ontology.owl#FromBaltimoreGroup -->
 
     <owl:ObjectProperty rdf:about="file://virus_host_ontology.owl#FromBaltimoreGroup">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="file://virus_host_ontology.owl#Virus"/>
         <rdfs:range rdf:resource="file://virus_host_ontology.owl#BaltimoreGroup"/>
     </owl:ObjectProperty>
@@ -287,10 +288,82 @@
     
 
 
+    <!-- file://virus_host_ontology.owl#GroupIIIViruses -->
+
+    <owl:Class rdf:about="file://virus_host_ontology.owl#GroupIIIViruses">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="file://virus_host_ontology.owl#Virus"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                        <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupIII"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- file://virus_host_ontology.owl#GroupIIViruses -->
+
+    <owl:Class rdf:about="file://virus_host_ontology.owl#GroupIIViruses">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="file://virus_host_ontology.owl#Virus"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                        <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupII"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
     <!-- file://virus_host_ontology.owl#GroupIV -->
 
     <owl:Class rdf:about="file://virus_host_ontology.owl#GroupIV">
         <rdfs:subClassOf rdf:resource="file://virus_host_ontology.owl#BaltimoreGroup"/>
+    </owl:Class>
+    
+
+
+    <!-- file://virus_host_ontology.owl#GroupIVViruses -->
+
+    <owl:Class rdf:about="file://virus_host_ontology.owl#GroupIVViruses">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="file://virus_host_ontology.owl#Virus"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                        <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupIV"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- file://virus_host_ontology.owl#GroupIViruses -->
+
+    <owl:Class rdf:about="file://virus_host_ontology.owl#GroupIViruses">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="file://virus_host_ontology.owl#Virus"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                        <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupI"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
     </owl:Class>
     
 
@@ -315,6 +388,60 @@
 
     <owl:Class rdf:about="file://virus_host_ontology.owl#GroupVII">
         <rdfs:subClassOf rdf:resource="file://virus_host_ontology.owl#BaltimoreGroup"/>
+    </owl:Class>
+    
+
+
+    <!-- file://virus_host_ontology.owl#GroupVIIViruses -->
+
+    <owl:Class rdf:about="file://virus_host_ontology.owl#GroupVIIViruses">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="file://virus_host_ontology.owl#Virus"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                        <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupVII"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- file://virus_host_ontology.owl#GroupVIViruses -->
+
+    <owl:Class rdf:about="file://virus_host_ontology.owl#GroupVIViruses">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="file://virus_host_ontology.owl#Virus"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                        <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupVI"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- file://virus_host_ontology.owl#GroupVViruses -->
+
+    <owl:Class rdf:about="file://virus_host_ontology.owl#GroupVViruses">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="file://virus_host_ontology.owl#Virus"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                        <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupV"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
     </owl:Class>
     
 
@@ -611,6 +738,70 @@
 
     <owl:Class rdf:about="file://virus_host_ontology.owl#Virus">
         <rdfs:subClassOf rdf:resource="file://virus_host_ontology.owl#Species"/>
+    </owl:Class>
+    
+
+
+    <!-- file://virus_host_ontology.owl#VirusDNA -->
+
+    <owl:Class rdf:about="file://virus_host_ontology.owl#VirusDNA">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="file://virus_host_ontology.owl#Virus"/>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                                <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupI"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                                <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupII"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                                <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupVII"/>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- file://virus_host_ontology.owl#VirusRNA -->
+
+    <owl:Class rdf:about="file://virus_host_ontology.owl#VirusRNA">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="file://virus_host_ontology.owl#Virus"/>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                                <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupIII"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                                <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupIV"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                                <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupV"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="file://virus_host_ontology.owl#FromBaltimoreGroup"/>
+                                <owl:someValuesFrom rdf:resource="file://virus_host_ontology.owl#GroupVI"/>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
     </owl:Class>
     
 
@@ -7461,6 +7652,7 @@
 
     <owl:NamedIndividual rdf:about="file://virus_host_ontology.owl#RNA">
         <rdf:type rdf:resource="file://virus_host_ontology.owl#BaltimoreGroup"/>
+        <rdf:type rdf:resource="file://virus_host_ontology.owl#GroupV"/>
     </owl:NamedIndividual>
     
 
@@ -9768,6 +9960,7 @@
 
     <owl:NamedIndividual rdf:about="file://virus_host_ontology.owl#ssRNA">
         <rdf:type rdf:resource="file://virus_host_ontology.owl#BaltimoreGroup"/>
+        <rdf:type rdf:resource="file://virus_host_ontology.owl#GroupV"/>
     </owl:NamedIndividual>
     
 
@@ -10349,6 +10542,7 @@
 
     <owl:NamedIndividual rdf:about="file://virus_host_ontology.owl#ssDNA(+)">
         <rdf:type rdf:resource="file://virus_host_ontology.owl#BaltimoreGroup"/>
+        <rdf:type rdf:resource="file://virus_host_ontology.owl#GroupII"/>
     </owl:NamedIndividual>
     
 
@@ -10357,6 +10551,7 @@
 
     <owl:NamedIndividual rdf:about="file://virus_host_ontology.owl#ssDNA(+/-)">
         <rdf:type rdf:resource="file://virus_host_ontology.owl#BaltimoreGroup"/>
+        <rdf:type rdf:resource="file://virus_host_ontology.owl#GroupII"/>
     </owl:NamedIndividual>
     
 
@@ -10365,6 +10560,7 @@
 
     <owl:NamedIndividual rdf:about="file://virus_host_ontology.owl#ssDNA(-)">
         <rdf:type rdf:resource="file://virus_host_ontology.owl#BaltimoreGroup"/>
+        <rdf:type rdf:resource="file://virus_host_ontology.owl#GroupII"/>
     </owl:NamedIndividual>
     
 
@@ -10382,6 +10578,7 @@
 
     <owl:NamedIndividual rdf:about="file://virus_host_ontology.owl#ssRNA(+/-)">
         <rdf:type rdf:resource="file://virus_host_ontology.owl#BaltimoreGroup"/>
+        <rdf:type rdf:resource="file://virus_host_ontology.owl#GroupV"/>
     </owl:NamedIndividual>
     
 
