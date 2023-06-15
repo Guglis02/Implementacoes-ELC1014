@@ -35,7 +35,7 @@ class Node:
     def __eq__(self, __value: object) -> bool:
         return self.state == __value.state
     
-def DFS():
+def DepthFirstSearch():
     openNodes = []
     closedNodes = []
 
@@ -58,7 +58,7 @@ def DFS():
 
     return None
 
-def BFS():
+def BreadthFirstSearch():
     openNodes = []
     closedNodes = []
 
@@ -84,7 +84,7 @@ initial_state = [True, True, True, True]
 goal_state = [False, False, False, False]
 
 # Chama a busca em profundidade
-result = DFS()
+result = BreadthFirstSearch()
 
 print("Etapas:")
 
