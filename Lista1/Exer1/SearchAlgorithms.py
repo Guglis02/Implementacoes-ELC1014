@@ -4,15 +4,20 @@
 # Define as ações e os operadores
 # A mudança de margem é feita usando o operador not
 actions = [
-    ("atravessaFazendeiro", lambda state: [not state[0], state[1], state[2], state[3]]),
-    ("atravessaLobo", lambda state: [not state[0], not state[1], state[2], state[3]]),
-    ("atravessaOvelha", lambda state: [not state[0], state[1], not state[2], state[3]]),
-    ("atravessaRepolho", lambda state: [not state[0], state[1], state[2], not state[3]])
+    ("Atravessa Fazendeiro", lambda state: [not state[0], state[1], state[2], state[3]]),
+    ("Atravessa Lobo", lambda state: [not state[0], not state[1], state[2], state[3]]),
+    ("Atravessa Ovelha", lambda state: [not state[0], state[1], not state[2], state[3]]),
+    ("Atravessa Repolho", lambda state: [not state[0], state[1], state[2], not state[3]])
 ]
 
+# Define se deve imprimir o caminho até o objetivo
+shouldPrintPath = True
+# Define se deve imprimir os estados abertos e fechados ao longo da busca
+shouldPrintStates = False
 
 class Node:
-    def __init__(self, state, parent):
+    def __init__(self, action, state, parent):
+        self.action = action
         self.state = state
         self.parent = parent
 
@@ -26,7 +31,7 @@ class Node:
 
         for i in range(4):
             if self.state[0] == self.state[i]:
-                newNode = Node(actions[i][1](self.state), self)
+                newNode = Node(actions[i][0], actions[i][1](self.state), self)
                 if newNode.IsValid():
                     newNodes.append(newNode)
 
@@ -39,11 +44,12 @@ def DepthFirstSearch():
     openNodes = []
     closedNodes = []
 
-    openNodes.append(Node(initial_state, None))
+    openNodes.append(Node("Estado Inicial", initial_state, None))
 
     while len(openNodes) > 0:
-        print("Nodos abertos: ", [n.state for n in openNodes])
-        print("Nodos fechados: ", [n.state for n in closedNodes])
+        if shouldPrintStates:
+            print("Nodos abertos: ", [n.state for n in openNodes])
+            print("Nodos fechados: ", [n.state for n in closedNodes])
         node = openNodes.pop(0)
         closedNodes.append(node)
 
@@ -62,11 +68,12 @@ def BreadthFirstSearch():
     openNodes = []
     closedNodes = []
 
-    openNodes.append(Node(initial_state, None))
+    openNodes.append(Node("Estado Inicial", initial_state, None))
 
     while len(openNodes) > 0:
-        print("Nodos abertos: ", [n.state for n in openNodes])
-        print("Nodos fechados: ", [n.state for n in closedNodes])
+        if shouldPrintStates:
+            print("Nodos abertos: ", [n.state for n in openNodes])
+            print("Nodos fechados: ", [n.state for n in closedNodes])
         node = openNodes.pop(0)
         closedNodes.append(node)
 
@@ -79,6 +86,24 @@ def BreadthFirstSearch():
 
     return None
 
+def PrintSearchPath(result):
+    if result is not None:
+        aux = result
+        path = []
+        path.append(aux)
+
+        while aux.parent is not None:
+            aux = aux.parent
+            path.append(aux)
+
+        path.reverse()
+
+        for node in path:
+            print(node.action)
+            print(node.state)
+    else:
+        print("Não foi possível encontrar uma solução.")
+
 # Estado inicial e objetivo
 initial_state = [True, True, True, True]
 goal_state = [False, False, False, False]
@@ -86,20 +111,9 @@ goal_state = [False, False, False, False]
 # Chama a busca em profundidade
 result = BreadthFirstSearch()
 
-print("Etapas:")
-
 # Imprime o caminho encontrado
 if result is not None:
-    path = []
-    path.append(result)
-
-    while result.parent is not None:
-        result = result.parent
-        path.append(result)
-
-    path.reverse()
-
-    for node in path:
-        print(node.state)
+    if shouldPrintPath:
+        PrintSearchPath(result)
 else:
     print("Não foi possível encontrar uma solução.")
