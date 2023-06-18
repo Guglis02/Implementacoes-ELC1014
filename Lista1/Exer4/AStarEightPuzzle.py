@@ -19,28 +19,28 @@ class Node:
             newState = self.state.copy()
             newState[emptyIndex] = newState[emptyIndex - 3]
             newState[emptyIndex - 3] = 0
-            newNodes.append(Node(self, newState, h(newState)))
+            newNodes.append(Node(self, newState, self.cost + 1))
 
         # Movimento para baixo
         if row < 2:
             newState = self.state.copy()
             newState[emptyIndex] = newState[emptyIndex + 3]
             newState[emptyIndex + 3] = 0
-            newNodes.append(Node(self, newState, h(newState)))
+            newNodes.append(Node(self, newState, self.cost + 1))
 
         # Movimento para esquerda
         if col > 0:
             newState = self.state.copy()
             newState[emptyIndex] = newState[emptyIndex - 1]
             newState[emptyIndex - 1] = 0
-            newNodes.append(Node(self, newState, h(newState)))
+            newNodes.append(Node(self, newState, self.cost + 1))
 
         # Movimento para direita
         if col < 2:
             newState = self.state.copy()
             newState[emptyIndex] = newState[emptyIndex + 1]
             newState[emptyIndex + 1] = 0
-            newNodes.append(Node(self, newState, h(newState)))
+            newNodes.append(Node(self, newState, self.cost + 1))
 
         return newNodes
         
@@ -58,15 +58,25 @@ def h(state):
     return distance
     
 def AStarSearch():
+    openNodes = []
+    closedNodes = []
 
+    openNodes.append(Node(None, initialState, h(initialState)))
 
-def SearchCostCalculator(result):
-    aux = result
-    cost = 0
-    while aux.parent is not None:
-        cost += aux.cost
-        aux = aux.parent
-    return cost
+    while len(openNodes) > 0:
+        currentNode = openNodes.pop(0)
+        closedNodes.append(currentNode)
+
+        if currentNode.state == goalState:
+            return currentNode
+
+        newNodes = currentNode.GenerateNewNodes()
+
+        for node in newNodes:
+            if node not in closedNodes:
+                openNodes.append(node)
+
+        openNodes.sort(key=lambda node: node.cost + h(node.state))
 
 def PrintSearchPath(result):
     if result is not None:
@@ -92,9 +102,8 @@ def PrintSearchPath(result):
 initialState = [1, 2, 3, 0, 6, 4, 8, 7, 5]
 goalState = [1, 2, 3, 8, 0, 4, 7, 6, 5]
 
-gbfs = GreedyBestFirstSearch()
+result = AStarSearch()
 
 # Imprime o caminho encontrado
 print("Caminho encontrado: ")
-PrintSearchPath(gbfs)
-print("Custo da busca gulosa pela melhor escolha: ", SearchCostCalculator(gbfs))
+PrintSearchPath(result)
