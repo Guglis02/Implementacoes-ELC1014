@@ -88,8 +88,10 @@ def GreedyBestFirstSearch(usingHeuristic):
             return node
 
         for childNode in node.GenerateNewNodes():
-            if (childNode not in openNodes) and (childNode not in closedNodes):
-                openNodes.insert(0, childNode)
+            validNodes = []
+            if childNode not in openNodes and childNode not in closedNodes:
+                validNodes.append(childNode)            
+            openNodes = validNodes + openNodes
 
         # print("Nodos abertos: ", [n.state for n in openNodes])
         # print("Nodos fechados: ", [n.state for n in closedNodes])
@@ -153,14 +155,14 @@ def RecursiveDraw(node_map, node, prefix):
 initialState = [[1, 3, 4], [8, 2, 5], [7, 6, 0]]
 goalState = [[1, 2, 3], [8, 0, 4], [7, 6, 5]]
 
-print("Algoritmo de busca gulosa pela melhor escolha usando heurística: \n")
-print("\nEstados das listas de nodos abertos e fechados: \n")    
-gbfshResult = GreedyBestFirstSearch(True)
-print("Árvore de busca: \n")
-DrawSearchTree(greedyVisited)
-print("Caminho encontrado: ")
-PrintSearchPath(gbfshResult)
-print("Custo da busca: ", SearchCostCalculator(gbfshResult))
+# print("Algoritmo de busca gulosa pela melhor escolha usando heurística: \n")
+# print("\nEstados das listas de nodos abertos e fechados: \n")    
+# gbfshResult = GreedyBestFirstSearch(True)
+# print("Árvore de busca: \n")
+# DrawSearchTree(greedyVisited)
+# print("Caminho encontrado: ")
+# PrintSearchPath(gbfshResult)
+# print("Custo da busca: ", SearchCostCalculator(gbfshResult))
 
 print("Algoritmo de busca gulosa pela melhor escolha usando custo 1: \n")
 print("\nEstados das listas de nodos abertos e fechados: \n")
