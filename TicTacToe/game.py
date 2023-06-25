@@ -34,6 +34,58 @@ def ChooseSymbol():
     print("\n")
     return (playerSymbol, aiSymbol)
 
+def MiniMax(board, depth, isMaximizing, alpha, beta):
+    print(depth)
+    if depth == 3:
+        return 0
+
+    winner = CheckWinner()
+    if winner != None:
+        return scores[winner]
+    
+    if isMaximizing:
+        bestScore = -1000
+        for i in range(6):
+            for j in range(6):
+                if board[i][j] == " ":
+                    board[i][j] = aiSymbol
+                    score = MiniMax(board, depth + 1, False, alpha, beta)
+                    board[i][j] = " "
+                    bestScore = max(score, bestScore)
+                    alpha = max(alpha, score)
+                    if beta <= alpha:
+                        break
+        return bestScore
+    else:        
+        bestScore = 1000
+        for i in range(6):
+            for j in range(6):
+                if board[i][j] == " ":
+                    board[i][j] = playerSymbol
+                    score = MiniMax(board, depth + 1, True, alpha, beta)
+                    board[i][j] = " "
+                    bestScore = min(score, bestScore)
+                    beta = min(beta, score)
+                    if beta <= alpha:
+                        break
+        return bestScore
+
+def GetBestMove(board, isPlayerTurn):
+    bestScore = -1000
+    bestMove = None
+
+    for i in range(6):
+        for j in range(6):
+            if board[i][j] == " ":
+                board[i][j] = aiSymbol
+                score = MiniMax(board, 0, not isPlayerTurn, -1000, 1000)
+                board[i][j] = " "
+                if score > bestScore:
+                    bestScore = score
+                    bestMove = (i, j)
+    
+    return bestMove
+
 
 def NextTurn(board, playerSymbol, aiSymbol, isPlayerTurn):
     player = playerSymbol if isPlayerTurn else aiSymbol
@@ -41,19 +93,18 @@ def NextTurn(board, playerSymbol, aiSymbol, isPlayerTurn):
     RenderBoard(board)
     row, column = -1, -1
 
-    # if isPlayerTurn:
-    #     while (row > 5 or row < 0) or (column > 5 or column < 0) or (row, column) not in availableSlots:
-    #         playerInput = input("Escolha uma posição (Escreva a coordenada separada por espaço: linha coluna):")
-    #         if not playerInput.strip():
-    #             continue
-    #         row, column = map(int, playerInput.split())
-    # else:
-    row, column = random.choice(availableSlots)
+    if isPlayerTurn:
+        while (row > 5 or row < 0) or (column > 5 or column < 0) or (row, column) not in availableSlots:
+            playerInput = input("Escolha uma posição (Escreva a coordenada separada por espaço: linha coluna):")
+            if not playerInput.strip() or len(playerInput.split()) == 1:
+                continue
+            row, column = map(int, playerInput.split())
+    else:
+        row, column = GetBestMove(board, isPlayerTurn)
         
     board[row][column] = player
     availableSlots.remove((row, column))
 
-    return (board)
     
 def RenderBoard(board):
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -61,7 +112,7 @@ def RenderBoard(board):
         print(board[r][0], " |", board[r][1], "|", board[r][2], "|", board[r][3], "|", board[r][4], "|", board[r][5])
         if (r < 5):
             print("---+---+---+---+---+---")
-    return board
+
 
 def HasFourInline(line):
     counter = 0
@@ -109,6 +160,12 @@ playerSymbol, aiSymbol = ChooseSymbol()
 
 # playerSymbol = "O"
 # aiSymbol = "X"
+
+scores = {
+    aiSymbol: 1,
+    playerSymbol: -1,
+    "tie": 0
+}
 
 isPlayerTurn = playerSymbol == "O"
 board = BuildBoard()
