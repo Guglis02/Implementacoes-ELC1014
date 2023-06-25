@@ -1,6 +1,7 @@
-# Dados 10 palitos cada jogador pode retirar 1, 2 ou 3 por turno. Perde o jogador que retira o último palito.
+# Dados 10 palitos cada jogador pode retirar 1, 2 ou 3 por turno. 
+# Perde o jogador que retira o último palito.
 
-
+# Classe que representa um nó da estrutura
 class Node:
     def __init__(self, parent, gameState, IsMaxTurn):
         self.parent = parent
@@ -11,97 +12,61 @@ class Node:
         newNodes = []
 
         # Remove 1 palito
-        if self.gameState > 1:
+        if self.gameState >= 1:
             newNodes.append(Node(self, self.gameState - 1, not self.IsMaxTurn))
 
         # Remove 2 palitos
-        if self.gameState > 2:
+        if self.gameState >= 2:
             newNodes.append(Node(self, self.gameState - 2, not self.IsMaxTurn))
 
         # Remove 3 palitos
-        if self.gameState > 3:
+        if self.gameState >= 3:
             newNodes.append(Node(self, self.gameState - 3, not self.IsMaxTurn))
 
         return newNodes
 
     def evaluate(self):
-        if self.gameState == 1:
-            if self.IsMaxTurn:
-                return -1
-            else:
-                return 1
-        return 0
+        if self.IsMaxTurn:
+            return 1
+        else:
+            return -1
         
     def __eq__(self, __value: object) -> bool:
         return self.gameState == __value.gameState
  
-def PrintSearchPath(result):
-    if result is not None:
-        aux = result
-        path = []
-        path.append(aux)
+# Função minimax
+def minimax(node, depth, isMaxTurn, indent=0):
+    # Verifica se o jogo acabou ou se chegou na profundidade máxima
+    if node.gameState == 0 or depth == 0:
+        return node.evaluate()
 
-        while aux.parent is not None:
-            aux = aux.parent
-            path.append(aux)
+    # Define o valor inicial do melhor valor de acordo com o jogador atual
+    bestValue = float('-inf') if isMaxTurn else float('inf')
 
-        path.reverse()
+    # Imprime o estado atual da árvore de busca com o valor de min e max propagados
+    print(f"{' ' * indent}GameState: {node.gameState}, {'Vez do MAX' if isMaxTurn else 'Vez do MIN'}")
 
-        for node in path:
-            print(node.IsMaxTurn, "   ", node.gameState)
-    else:
-        print("Não foi possível encontrar uma solução.")
+    # Gera todas as possíveis jogadas
+    for child in node.GenerateNewNodes():
+        # Chama a função minimax recursivamente para o próximo estado
+        value = minimax(child, depth - 1, not isMaxTurn, indent + 4)
 
-def Minimax():
-    openNodes = []
-    closedNodes = []
-
-    openNodes.append(Node(None, 10, True))
-
-    while len(openNodes) > 0:
-        node = openNodes.pop(0)
-
-        if node.gameState == 1:
-            return node
-        
-        closedNodes.append(node)
-
-        if node.IsMaxTurn:
-            bestValue = float('-inf')
-            bestNode = None
-
-            newNodes = node.GenerateNewNodes()
-            for newNode in newNodes:
-                value = Minimax(newNode).evaluate()
-                if value > bestValue:
-                    bestValue = value
-                    bestNode = newNode
-
-            return bestNode
+        # Atualiza o melhor valor de acordo com o jogador atual
+        if isMaxTurn:
+            bestValue = max(bestValue, value)
         else:
-            bestValue = float('inf')
-            bestNode = None
+            bestValue = min(bestValue, value)
 
-            newNodes = node.GenerateNewNodes()
-            for newNode in newNodes:
-                value = Minimax(newNode).evaluate()
-                if value < bestValue:
-                    bestValue = value
-                    bestNode = newNode
+    return bestValue
 
-            return bestNode
+# Define o estado inicial do jogo
+initial_state = Node(None, 10, True)
 
+# Chama a função minimax para o estado inicial
+bestValue = minimax(initial_state, 10, True)
 
-        newNodes = node.GenerateNewNodes()
-        for newNode in newNodes:
-            if newNode not in openNodes and newNode not in closedNodes:
-                openNodes.append(newNode)
-    return None
-
-initialState = 10
-finalState = 0
-
-result = Minimax()
-
-print("Caminho encontrado: ")
-PrintSearchPath(result)
+# Verifica se o jogador MAX ganhou ou perdeu
+if bestValue == 1:
+    print("MAX ganhou!")
+else:
+    print("MAX perdeu!")
