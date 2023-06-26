@@ -35,7 +35,6 @@ def ChooseSymbol():
     return (playerSymbol, aiSymbol)
 
 def MiniMax(board, depth, isMaximizing, alpha, beta):
-    print(depth)
     if depth == 3:
         return 0
 
@@ -78,7 +77,7 @@ def GetBestMove(board, isPlayerTurn):
         for j in range(6):
             if board[i][j] == " ":
                 board[i][j] = aiSymbol
-                score = MiniMax(board, 0, not isPlayerTurn, -1000, 1000)
+                score = MiniMax(board, 0, isPlayerTurn, -1000, 1000)
                 board[i][j] = " "
                 if score > bestScore:
                     bestScore = score
@@ -101,6 +100,7 @@ def NextTurn(board, playerSymbol, aiSymbol, isPlayerTurn):
             row, column = map(int, playerInput.split())
     else:
         row, column = GetBestMove(board, isPlayerTurn)
+        # row, column = random.choice(availableSlots)
         
     board[row][column] = player
     availableSlots.remove((row, column))
@@ -178,6 +178,6 @@ while (winner == None):
     isPlayerTurn = not isPlayerTurn
 
 if (winner == 'tie'):
-    print("The game is a tie.")
+    print("O jogo terminou com empate.")
 else:
-    print("The winner is: " + winner)
+    print("O vencedor foi: " + winner)
