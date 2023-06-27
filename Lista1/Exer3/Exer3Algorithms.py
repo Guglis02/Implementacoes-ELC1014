@@ -186,7 +186,7 @@ DrawSearchTree(greedyVisited)
 
 # Imprime o caminho encontrado
 if gbfs is not None:
-    print("\nPasso a passo encontrado pelo algoritmo de busca em largura: ")
+    print("\nPasso a passo encontrado pelo algoritmo de gulosa pela melhor escolha: ")
     PrintSearchPath(gbfs)
 else:
     print("Não foi possível encontrar uma solução.")
