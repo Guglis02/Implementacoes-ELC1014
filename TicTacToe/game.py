@@ -3,6 +3,7 @@ import random
 
 availableSlots = []
 
+# Desenha no terminal a "Tela inicial" do jogo, com as regras.
 def StartScreen():
     print("\n")
     print("Trabalho da disciplina de Inteligência Artificial - Jogo da Velha 6x6")
@@ -12,8 +13,8 @@ def StartScreen():
     print("\n")
     input("Aperte enter para começar.")
 
-
-def BuildBoard():
+# Função que preenche o tabuleiro com espaços vazios e retorna o tabuleiro
+def FillBoard():
     board = []
 
     for i in range(6):
@@ -25,6 +26,7 @@ def BuildBoard():
             
     return board
 
+# Pergunta ao jogador qual símbolo ele vai usar e atribui o símbolo oposto para a máquina
 def ChooseSymbol():
     playerSymbol = ""
     while playerSymbol != "X" and playerSymbol != "O":
@@ -34,8 +36,9 @@ def ChooseSymbol():
     print("\n")
     return (playerSymbol, aiSymbol)
 
+# Função que implementa o algoritmo Minimax
 def MiniMax(board, depth, isMaximizing, alpha, beta):
-    if depth == 3:
+    if depth == 4:
         return 0
 
     winner = CheckWinner()
@@ -69,6 +72,7 @@ def MiniMax(board, depth, isMaximizing, alpha, beta):
                         break
         return bestScore
 
+# Função que retorna o índice da melhor jogada para a máquina
 def GetBestMove(board, isPlayerTurn):
     bestScore = -1000
     bestMove = None
@@ -85,7 +89,7 @@ def GetBestMove(board, isPlayerTurn):
     
     return bestMove
 
-
+# Turno do jogo
 def NextTurn(board, playerSymbol, aiSymbol, isPlayerTurn):
     player = playerSymbol if isPlayerTurn else aiSymbol
 
@@ -105,7 +109,7 @@ def NextTurn(board, playerSymbol, aiSymbol, isPlayerTurn):
     board[row][column] = player
     availableSlots.remove((row, column))
 
-    
+# Desenha o tabuleiro no terminal
 def RenderBoard(board):
     os.system('cls' if os.name == 'nt' else 'clear')
     for r in range(0, 6):
@@ -113,7 +117,7 @@ def RenderBoard(board):
         if (r < 5):
             print("---+---+---+---+---+---")
 
-
+# Recebe uma lista de elementos e retorna o elemento que se repete 4 vezes seguidas
 def HasFourInline(line):
     counter = 0
     for i in range(0, len(line) - 1):
@@ -125,6 +129,7 @@ def HasFourInline(line):
             return line[i]
     return None
 
+# Verifica o tabuleiro em busca de um vencedor
 def CheckWinner():
     winner = None
 
@@ -153,14 +158,10 @@ def CheckWinner():
     else:
         return winner
 
-
-# Main
 StartScreen()
 playerSymbol, aiSymbol = ChooseSymbol()
 
-# playerSymbol = "O"
-# aiSymbol = "X"
-
+# Lookup table para os scores
 scores = {
     aiSymbol: 1,
     playerSymbol: -1,
@@ -168,7 +169,7 @@ scores = {
 }
 
 isPlayerTurn = playerSymbol == "O"
-board = BuildBoard()
+board = FillBoard()
 
 # Game loop
 winner = None
